@@ -1,0 +1,1247 @@
+<!doctype html>
+<html>
+<head>
+<title>ONLINE Notes</title>
+<link rel="icon" href="https://chanpreetsingh16.github.io/ONLINE/onno1.png">
+<link rel="stylesheet" href="onnocss.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&family=Quicksand:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+</head>
+<body onload="main()">
+<script>
+function main() {
+	if( /Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent) ) {
+		document.body.classList.toggle("phone");
+		document.getElementById("brandfont").style.display = "none";
+		document.getElementById("navcendiv").style.maxWidth = "calc(100% - 165px)";
+		document.getElementById("navcendiv").style.whiteSpace = "nowrap";
+		document.getElementById("navcendiv").style.overflow = "hidden";
+		document.getElementById("navcendiv").style.textOverflow = "ellipsis";
+		document.getElementById("titledropdni").style.float = "right";
+		document.getElementById("titledropdni").style.marginLeft = "7px";
+		document.getElementById("titledropdni").style.marginRight = "0px";
+	}
+	else {}
+}
+
+const div = document.getElementById("cont");
+var code = document.getElementById("commandinput");
+var a = "9041694176";
+function right() {
+	if (document.getElementById("commandinput").value === a) {
+	}
+	else {
+		window.event.preventDefault()
+	}
+}
+document.onkeydown = (e) => {
+	const cmdbox = document.getElementById("cmdbox");
+
+    if (e.keyCode == 123) {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key == 'I') {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key == 'C') {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key == 'J') {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.key == 'U') {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.key == 's') {
+        e.preventDefault();		
+        document.getElementById("saveBt").click();
+    }
+    if (e.ctrlKey && e.key == 'o') {
+        e.preventDefault();		
+        document.getElementById("openBt").click();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key == '%') {
+        document.getElementById("cmdbt3").click();
+		document.getElementById("commandinput").focus();
+    }
+	if(e.key === "Enter" && cmdbox.style.display === "block") {
+		event.preventDefault();
+		document.getElementById("cmdbt1").click();		
+	}
+};
+function clcmdbox() {
+		document.getElementById("cmdbox").style.display = "none";
+		document.getElementById("cmdresult").style.display = "none";
+		document.getElementById("commandinput").value = "";
+		document.getElementById("cmdresult").innerHTML = "";
+}
+function opcmdbox() {
+		document.getElementById("cmdbox").style.display = "block";
+}
+function cmdrun() {
+	document.getElementById("cmdresult").style.display = "block";
+	var cmdcmd = document.getElementById("commandinput");
+	
+	if(cmdcmd.value === "user?_authentic/q=var.getCommandFor = all*/#") {
+		document.getElementById("cmdresult").innerHTML = "<b>user?_authentic/q=var.getCommandFor = all*/#</b> - (To Get All Available Commands)" + 
+		"<br><br><b>9041694176</b> - (For Context Menu Enabling)" + "<br><br><b>user?_authentic/q=var.getCommandFor = about*/#</b> - (To Get About Information)";
+	}
+	else if(cmdcmd.value === "9041694176") {
+		document.getElementById("cmdresult").innerHTML = "No need to run the command.";
+	}
+	else if(cmdcmd.value === "user?_authentic/q=var.getCommandFor = about*/#") {
+		document.getElementById("cmdresult").innerHTML = "<b>Version:</b> ONLINE Notes V1 20.11.2024 ©ONLINE2023<br><br> <b>Company:</b> ©ONLINE2023<br><br> <b>Developer:</b> Chanpreet Singh<br><br> <b>Supported Screen Width:</b> min.290px";
+	}
+	else{
+		document.getElementById("cmdresult").innerHTML = "void";
+	}
+}
+</script>
+<div class="cont" id="cont" oncontextmenu="right()">
+
+<div id="nav1">
+
+<div id="brand">
+<img src="https://chanpreetsingh16.github.io/ONLINE/onno1.png">
+<font id="brandfont">ONLINE Notes</font>
+</div>
+
+<div id="navcendiv" onclick="opendrpdn()"><font id="noteTitle">Note 1</font><i class="material-symbols-outlined" id="titledropdni">keyboard_arrow_down</i></div>
+
+<div id="notetitledropdown" class="drpdn">
+	<div class="drpdnchild" onclick="opnote1()"><i class="material-symbols-outlined">article</i>Note 1</div>
+	<div class="drpdnchild" onclick="opnote2()"><i class="material-symbols-outlined">article</i>Note 2</div>
+	<div class="drpdnchild" onclick="opnote3()"><i class="material-symbols-outlined">article</i>Note 3</div>
+	<div class="drpdnchild" id="openBt" onclick="opkeynotebox()"><i class="material-symbols-outlined">key</i><font>Open by Note Key Name</font></div>
+	<div class="drpdnchild" onclick="opcreatenotebox()"><i class="material-symbols-outlined">add</i><font>Create New Note</font></div>
+	<div class="drpdnchild" id="drpdncl" onclick="cldrpdn()"><i class="material-symbols-outlined">close</i><font>Close</font></div>
+	
+	<script>
+		document.getElementById("notetitledropdown").style.display = "none";
+	
+		function opendrpdn() {
+			const drpdnbox = document.getElementById("notetitledropdown");
+			
+			if(drpdnbox.style.display === "none"){
+				drpdnbox.style.display = "block";
+				document.getElementById("titledropdni").style.transform = "rotate(180deg)";
+				document.getElementById("titledropdni").style.animationName = "titledropdni1";
+			}
+			else{
+				drpdnbox.style.display = "none";
+				document.getElementById("titledropdni").style.transform = "rotate(360deg)";
+				document.getElementById("titledropdni").style.animationName = "titledropdni2";
+			}
+		}
+		
+		function cldrpdn() {
+			const drpdnbox = document.getElementById("notetitledropdown");
+			
+			if(drpdnbox.style.display === "block"){
+				document.getElementById("notetitledropdown").style.display = "none";
+				document.getElementById("titledropdni").style.transform = "rotate(360deg)";
+				document.getElementById("titledropdni").style.animationName = "titledropdni2";
+			}
+		else{}
+		}
+		function opnote1() {
+			document.getElementById("noteTitle").innerHTML = "Note 1";
+			document.getElementById("mainnote").value = localStorage.getItem("onnoNote1");
+			document.getElementById("notetitledropdown").style.display = "none";
+			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
+			document.getElementById("titledropdni").style.animationName = "titledropdni2";
+		}
+		function opnote2() {
+			document.getElementById("noteTitle").innerHTML = "Note 2";
+			document.getElementById("mainnote").value = localStorage.getItem("onnoNote2");
+			document.getElementById("notetitledropdown").style.display = "none";
+			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
+			document.getElementById("titledropdni").style.animationName = "titledropdni2";
+		}
+		function opnote3() {
+			document.getElementById("noteTitle").innerHTML = "Note 3";
+			document.getElementById("mainnote").value = localStorage.getItem("onnoNote3");
+			document.getElementById("notetitledropdown").style.display = "none";
+			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
+			document.getElementById("titledropdni").style.animationName = "titledropdni2";
+		}
+		function opkeynotebox() {
+			document.getElementById("keynotebox").style.display = "block";
+			document.getElementById("drpdncl").click();
+			document.getElementById("keynamein").focus();
+		}
+		function clkeynotbox() {
+			document.getElementById("keynotebox").style.display = "none";
+			document.getElementById("keynamein").value = "";
+		}
+		function opnotebyKey(){
+			document.getElementById("keynotebox").style.display = "none";
+			var key = document.getElementById("keynamein");	
+			var title = document.getElementById("noteTitle");	
+			if(key.value === "user?_authentic/q=var.getCommandFor = openCMD*/#") {
+				document.getElementById("cmdbox").style.display = "block";
+				document.getElementById("keynamein").value = "";
+				document.getElementById("noteTitle").innerHTML = title.textContent;
+			}
+			else{
+				document.getElementById("noteTitle").innerHTML = key.value;
+				document.getElementById("mainnote").value = localStorage.getItem("onno" + key.value);
+				document.getElementById("keynamein").value = "";
+			}
+		}
+	</script>
+</div>
+
+<button id="navrhtbt" onclick="openMoreActions()" title="More Actions"><i class="material-symbols-outlined">apps</i></button>
+</div>
+
+<textarea class="mainnote" id="mainnote" placeholder="Write Here!" onclick="cldrpdn()" oncontextmenu="cldrpdn()" autofocus></textarea>
+
+<div class="toolbar">
+<button onclick="opsavenotebox()" title="Save Note" id="saveBt"><i class="material-symbols-outlined">save</i></button>
+<button onclick="copyNote()" title="Copy Note"><i class="material-symbols-outlined">content_copy</i></button>
+<button onclick="clearNote()" title="Clear Note"><i class="material-symbols-outlined">close</i></button>
+<!--<button onclick="()" title="Open Note By Key Name"><i class="material-symbols-outlined">key</i></button>-->
+<button onclick="opdelnotebox()" title="Delete Note" id="delnot"><i class="material-symbols-outlined">delete</i></button>
+<button onclick="opcreatenotebox()" title="Create New Note" id="newnote"><i class="material-symbols-outlined">add</i></button>
+
+<script>
+function copyNote() {
+	const note = document.getElementById("mainnote");
+	window.navigator.clipboard.writeText(note.value);
+	document.getElementById("drpdncl").click();
+}
+function clearNote() {
+	document.getElementById("mainnote").value = "";
+	document.getElementById("mainnote").focus();
+	document.getElementById("drpdncl").click();
+}
+</script>
+</div>
+
+
+<div id="keynotebox" class="keynotebox">
+<label>Open Note by Key Name</label>
+<input type="text" id="keynamein" placeholder="Enter Key Name(like Note1 etc.)"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+<button onclick="opnotebyKey()" id="keybt1">Open</button>
+<button onclick="clkeynotbox()" id="keybt2">Close</button>
+</div>
+
+<div id="crtnotebox" class="crtnotebox">
+<label>Create New Note</label>
+<input type="text" id="crtnamein" placeholder="Enter Note Title/Key(Page1 etc.)"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+<button onclick="createnote()" id="crtbt1">Create</button>
+<button onclick="clcreatenotebox()" id="crtbt2">Close</button>
+<script>
+		function opcreatenotebox() {
+			document.getElementById("crtnotebox").style.display = "block";
+			document.getElementById("drpdncl").click();
+			document.getElementById("crtnamein").focus();
+		}
+		function clcreatenotebox() {
+			document.getElementById("crtnotebox").style.display = "none";
+			document.getElementById("crtnamein").value = "";
+		}
+		function createnote(){
+			document.getElementById("crtnotebox").style.display = "none";
+			var newKey = document.getElementById("crtnamein");			
+			document.getElementById("noteTitle").innerHTML = newKey.value;
+			localStorage.setItem("onno" + newKey.value, "");
+			document.getElementById("crtnamein").value = "";
+		}
+</script>
+</div>
+
+<div id="savenotebox" class="savenotebox">
+<label>Save Note as</label><br><br>
+<button class="button" onclick="savenamein.value='Note1'">Note 1</button>
+<button class="button" onclick="savenamein.value='Note2'">Note 2</button>
+<button class="button" onclick="savenamein.value='Note3'">Note 3</button>
+<label>or</label>
+<input type="text" name="savenamein" id="savenamein" placeholder="Enter Note Title/Key(Page1 etc.)"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+<button onclick="savenote()" id="crtbt1">Save</button>
+<button onclick="clsavenotebox()" id="crtbt2">Close</button>
+<script>
+		function opsavenotebox() {
+			document.getElementById("savenotebox").style.display = "block";
+			document.getElementById("drpdncl").click();
+			document.getElementById("savenamein").focus();
+		}
+		function clsavenotebox() {
+			document.getElementById("savenotebox").style.display = "none";
+			document.getElementById("savenamein").value = "";
+		}
+		function savenote(){
+			document.getElementById("savenotebox").style.display = "none";
+			var saveKey = document.getElementById("savenamein");
+			var mainnote = document.getElementById("mainnote");
+			localStorage.setItem("onno" + saveKey.value, mainnote.value);
+			document.getElementById("savenamein").value = "";
+		}
+</script>
+</div>
+
+<div id="delnotebox" class="delnotebox">
+<label>Delete Note</label><br><br>
+<button class="button" onclick="delnamein.value='Note1'">Note 1</button>
+<button class="button" onclick="delnamein.value='Note2'">Note 2</button>
+<button class="button" onclick="delnamein.value='Note3'">Note 3</button>
+<label>or</label>
+<input type="text" name="delnamein" id="delnamein" placeholder="Enter Note Title/Key(Page1 etc.)"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+<button onclick="delnote()" id="crtbt1">Delete</button>
+<button onclick="cldelnotebox()" id="crtbt2">Cancel</button>
+<script>
+		function opdelnotebox() {
+			document.getElementById("delnotebox").style.display = "block";
+			document.getElementById("drpdncl").click();
+			document.getElementById("delnamein").focus();
+		}
+		function cldelnotebox() {
+			document.getElementById("delnotebox").style.display = "none";
+			document.getElementById("delnamein").value = "";
+		}
+		function delnote(){
+			document.getElementById("delnotebox").style.display = "none";
+			var delKey = document.getElementById("delnamein");
+			localStorage.removeItem("onno" + delKey.value);
+			document.getElementById("delnamein").value = "";
+		}
+</script>
+</div>
+
+<div id="morediv" class="morediv">
+<script>
+function openMoreActions() {
+	document.getElementById("morediv").style.display = "block";
+}
+function closemorediv() {
+	document.getElementById("morediv").style.display = "none";
+}
+</script>
+<div id="morenav"><button onclick="closemorediv()"><i class="material-symbols-outlined">arrow_back</i></button>&nbsp;&nbsp;More Actions</div>
+
+<div id="container">
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#036;">key</i><font>Open Note by Key Name</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#f03;">add</i><font>Create New Note</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#93f;">save</i><font>Save Note by Key Name</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#3c3;">delete</i><font>Delete Note by Key Name</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#063;">delete_sweep</i><font>Delete Multiple Notes at once</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#f60;">edit</i><font>Rename Key</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#333;">history</i><font>Key History</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#06f;">encrypted</i><font>Locker Notes</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#096;">person</i><font>Contact Developer</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#039;">info</i><font>About</font></div>
+</div>
+</div>
+
+
+<div id="cmdbox">
+<input type="text" id="commandinput" placeholder="Enter Command Code" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+<button class="cmdbt1" onclick="cmdrun()" id="cmdbt1">Run</button><br>
+<button class="cmdbt1" onclick="clcmdbox()" id="cmdbt2">Close</button>
+<button class="" onclick="opcmdbox()" id="cmdbt3" style="display:none;">Open</button><br>
+<div id="cmdresult"></div>
+</div>
+
+</div>
+</body>
+<style>
+:root{
+	--b1:rgb(240,240,240);
+	--b2:rgb(20,20,20);
+	--b3:rgb(215,215,215);
+	--b4:rgb(185,185,185);
+	--b5:rgb(185,185,185);
+	--b6:rgb(165,165,165);
+	--b7:rgb(185,185,185);
+	--b8:#f33;
+	--b9:#f33;
+	--b10:#c00;
+	--c1:#000;
+	--s1:rgba(0,0,0,.5);
+	--s2:#000;
+	--brand-padrht:10px;
+	--cs:#000;
+	--fff:#fff;
+}
+.phone{
+	--b4:rgba(0,0,0,0);
+	--b5:rgb(185,185,185);
+	--b6:rgb(185,185,185);
+	--b7:rgb(215,215,215);
+	--b8:#f33;
+	--b9:rgb(0,0,0,0);
+	--b10:#c00;
+	--brand-padrht:0px;
+	--cs:#fff;
+	--fff:#f33;
+}
+*::selection{
+	color:#fff;
+	background:rgba(0,0,0,.3);
+}
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    z-index:1;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background:transparent; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(102, 102, 102,.8); 
+	border-radius:4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(51, 51, 51,.8);
+}
+.cont{
+	position:fixed;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background:var(--b1);
+}
+#nav1{
+	/*border:1px solid #000;*/
+	position:fixed;
+	top:10px;
+	left:10px;
+	width:calc(100% - 20px);
+	height:50px;
+	z-index:11;
+}
+#brand{
+	height:50px;
+	float:left;
+	padding-right:var(--brand-padrht);
+	border-radius:7px;
+	background:var(--b3);
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+#brand img{
+	height:50px;
+	float:left;
+	margin-left:5px;
+	filter:drop-shadow(2px 2px 2px var(--s1));
+}
+#brand font{
+	/*display:none;*/
+	font-family:quicksand;
+	float:left;
+	line-height:50px;
+	font-size:25px;
+	font-weight:500;
+	margin-left:5px;
+	cursor:context-menu;
+	color:var(--c1);
+}
+#navrhtbt{
+	height:50px;
+	width:50px;
+	border:none;
+	outline:none;
+	border-radius:7px;
+	color:var(--c1);
+	position:fixed;
+	top:10px;
+	right:10px;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+#navrhtbt:hover{
+	background:var(--b4)
+}
+#navrhtbt:active{
+	background:var(--b3)
+}
+#navrhtbt i{
+	font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+	font-size:28px;
+}
+#navcendiv{
+	max-width:calc(100% - 525px);
+	height:50px;
+	padding:0 10px 0 10px;
+	border-radius:7px;
+	background:var(--b3);
+	color:var(--c1);
+	position:fixed;
+	top:10px;
+	left:50%;
+	transform:translate(-50%, 0);
+	font-family:quicksand;
+	font-size:18px;
+	font-weight:550;
+	line-height:50px;
+	cursor:context-menu;
+	z-index:11;
+}
+#navcendiv:hover{
+	background:var(--b7);
+}
+#navcendiv:active{
+	background:var(--b6);
+}
+#navcendiv font{
+	float:left;
+	/*white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width:calc(100% - 33px);
+	min-width:60px;*/
+}
+#navcendiv i{
+	float:left;
+	line-height:50px;
+	margin-left:7px;
+	margin-right:0px;
+	animation-name:;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-count:linear;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+@keyframes titledropdni1{
+	0%{transform:rotate(0deg);}
+	100%{transform:rotate(-180deg);}
+}
+@keyframes titledropdni2{
+	0%{transform:rotate(180deg);}
+	100%{transform:rotate(360deg);}
+}
+.drpdn{
+	display:none;
+	width:217px;
+	padding:0 5px 5px 5px;
+	position:fixed;
+	top:70px;
+	left:50%;
+	transform:translate(-50%, 0);
+	font-family:quicksand;
+	font-size:15px;
+	font-weight:550;
+	background:var(--b3);
+	border-radius:7px;
+	cursor:context-menu;
+	box-shadow:0 0 5px #000;
+	animation-name:drpdn;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-function:linear;
+	z-index:10;
+}
+@keyframes drpdn{
+	0%{top:-400px;}
+	100%{top:70px;}
+}
+.drpdnchild{
+	width:(100% - 10px);
+	/*border:1px solid#000;*/
+	height:35px;
+	margin-top:5px;
+	border-radius:2px;
+	padding:0 5px 0 5px;
+	color:var(--c1);
+	line-height:35px;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.drpdnchild:hover{
+	background:var(--b4);
+}
+.drpdnchild:active{
+	background:var(--b6);
+}
+.drpdnchild i{
+	float:left;
+	line-height:35px;
+}
+.drpdnchild font{
+	float:left;
+	margin-left:5px;
+}
+.mainnote{
+	position:fixed;
+	bottom:10px;
+	left:50%;
+	transform:translate(-50%, 0);
+	width:calc(100% - 26px);
+	height:calc(100% - 86px);
+	resize:none;
+	outline:none;
+	border:none;
+	border-radius:7px;
+	background:var(--b3);
+	font-family:quicksand;
+	font-size:16px;/*16*/
+	letter-spacing:1px;
+	font-weight:460;
+	line-height:20px;/*20*/
+	text-indent:5px;
+	text-align:justify;
+}
+.toolbar{
+	position:fixed;
+	bottom:20px;
+	left:50%;
+	transform:translate(-50%, 0);
+	height:45px;
+	/*border:1px solid#000;*/
+	padding:5px 5px 0 0px;
+	border-radius:50px;
+	background:rgba(0,0,0,.73);
+	width:225px;
+	overflow:hidden;
+	overflow-x:auto;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.toolbar ::-webkit-scrollbar {
+	width:0px;
+	height:0px;
+}
+.toolbar button{
+	height:40px;
+	width:40px;
+	border:none;
+	outline:none;
+	border-radius:50%;
+	float:left;
+	margin-left:5px;
+	background:transparent;
+}
+.toolbar button i{
+	text-align:center;
+	font-size:24px;
+	line-height:28px;
+	color:#fff;
+}
+.toolbar button:hover{
+	background:var(--b4);
+}
+.toolbar button:active{
+	background:var(--b6);
+}
+.toolbar button:hover i{
+	color:var(--cs);
+}
+.toolbar button:active i{
+	color:#000;
+}
+/*opnote*/
+#keynotebox{
+	display:none;
+	width:250px;
+	/*height:100px;*/
+	background:var(--b3);
+	box-shadow:0 0 5px #000;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	border-radius:7px;
+	animation-name:fade-in;
+	animation-duration:0.8s;
+	animation-iteration-count:1;
+	animation-timming-function:linear;
+	padding:10px;
+	z-index:11;
+}
+#keynotebox label{
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:600;
+}
+#keynotebox input{
+	border:none;
+	outline:none;
+	width:calc(100% - 4px);
+	height:25px;
+	color:var(--c1);
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	margin-top:10px;
+	background:var(--b5);
+	border-radius:4px;
+}
+#keynotebox button{
+	width:120px;
+	height:30px;
+	border-radius:5px;
+	float:left;
+	margin-top:10px;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	outline:none;
+	background:transparent;
+	color:var(--c1);
+}
+#keynotebox #keybt1{
+	border:2px solid var(--b6);
+}
+#keynotebox #keybt1:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#keynotebox #keybt1:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+#keynotebox #keybt2{
+	margin-left:10px;
+	border:2px solid var(--b3);
+}
+#keynotebox #keybt2:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#keynotebox #keybt2:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+/*create note*/
+#crtnotebox{
+	display:none;
+	width:250px;
+	/*height:100px;*/
+	background:var(--b3);
+	box-shadow:0 0 5px #000;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	border-radius:7px;
+	animation-name:fade-in;
+	animation-duration:0.8s;
+	animation-iteration-count:1;
+	animation-timming-function:linear;
+	padding:10px;
+	z-index:11;
+}
+#crtnotebox label{
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:600;
+}
+#crtnotebox input{
+	border:none;
+	outline:none;
+	width:calc(100% - 4px);
+	height:25px;
+	color:var(--c1);
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	margin-top:10px;
+	background:var(--b5);
+	border-radius:4px;
+}
+#crtnotebox button{
+	width:120px;
+	height:30px;
+	border-radius:5px;
+	float:left;
+	margin-top:10px;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	outline:none;
+	background:transparent;
+	color:var(--c1);
+}
+#crtnotebox #crtbt1{
+	border:2px solid var(--b6);
+}
+#crtnotebox #crtbt1:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#crtnotebox #crtbt1:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+#crtnotebox #crtbt2{
+	margin-left:10px;
+	border:2px solid var(--b3);
+}
+#crtnotebox #crtbt2:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#crtnotebox #crtbt2:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+/*save note*/
+#savenotebox{
+	display:none;
+	width:250px;
+	/*height:100px;*/
+	background:var(--b3);
+	box-shadow:0 0 5px #000;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	border-radius:7px;
+	animation-name:fade-in;
+	animation-duration:0.8s;
+	animation-iteration-count:1;
+	animation-timming-function:linear;
+	padding:0 10px 10px 10px;
+	z-index:11;
+}
+#savenotebox label{
+	margin-top:10px;
+	float:left;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:600;
+}
+#savenotebox .button{
+	width:calc(100%/3 - 4px);
+	height:30px;
+	border-radius:5px;
+	float:left;
+	margin:10px 2px 0 2px;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	outline:none;
+	background:transparent;
+	color:var(--c1);
+	border:2px solid var(--b6);
+}
+#savenotebox .button:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#savenotebox .button:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+#savenotebox input{
+	border:none;
+	outline:none;
+	width:calc(100% - 4px);
+	height:25px;
+	color:var(--c1);
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	margin-top:10px;
+	background:var(--b5);
+	border-radius:4px;
+}
+#savenotebox button{
+	width:120px;
+	height:30px;
+	border-radius:5px;
+	float:left;
+	margin-top:10px;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	outline:none;
+	background:transparent;
+	color:var(--c1);
+}
+#savenotebox #crtbt1{
+	border:2px solid var(--b6);
+}
+#savenotebox #crtbt1:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#savenotebox #crtbt1:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+#savenotebox #crtbt2{
+	margin-left:10px;
+	border:2px solid var(--b3);
+}
+#savenotebox #crtbt2:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#savenotebox #crtbt2:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+
+/*delete note*/
+#delnotebox{
+	display:none;
+	width:250px;
+	/*height:100px;*/
+	background:var(--b3);
+	box-shadow:0 0 5px #000;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	border-radius:7px;
+	animation-name:fade-in;
+	animation-duration:0.8s;
+	animation-iteration-count:1;
+	animation-timming-function:linear;
+	padding:0 10px 10px 10px;
+	z-index:11;
+}
+#delnotebox label{
+	margin-top:10px;
+	float:left;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:600;
+}
+#delnotebox .button{
+	width:calc(100%/3 - 4px);
+	height:30px;
+	border-radius:5px;
+	float:left;
+	margin:10px 2px 0 2px;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	outline:none;
+	background:transparent;
+	color:var(--c1);
+	border:2px solid var(--b6);
+}
+#delnotebox .button:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#delnotebox .button:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+#delnotebox input{
+	border:none;
+	outline:none;
+	width:calc(100% - 4px);
+	height:25px;
+	color:var(--c1);
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	margin-top:10px;
+	background:var(--b5);
+	border-radius:4px;
+}
+#delnotebox button{
+	width:120px;
+	height:30px;
+	border-radius:5px;
+	float:left;
+	margin-top:10px;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	outline:none;
+	background:transparent;
+	color:var(--c1);
+}
+#delnotebox #crtbt1{
+	border:2px solid var(--b8);
+	color:var(--b8);
+}
+#delnotebox #crtbt1:hover{
+	border:2px solid var(--b8);
+	background:var(--b9);
+	color:var(--fff);
+}
+#delnotebox #crtbt1:active{
+	border:2px solid var(--b10);
+	background:var(--b10);
+	color:#fff;
+}
+#delnotebox #crtbt2{
+	margin-left:10px;
+	border:2px solid var(--b3);
+}
+#delnotebox #crtbt2:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#delnotebox #crtbt2:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+.morediv{
+	display:none;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:12;
+	height:100%;
+	width:100%;
+	background:var(--b1);
+	animation-name:fade-in;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-function:linear;
+}
+.morediv ::-webkit-scrollbar{
+	width:0px;
+	height:0px;
+}
+#morenav{
+	/*border:1px solid#000;*/
+	width:100%;
+	height:50px;
+	line-height:50px;
+	font-family:quicksand;
+	font-size:17px;
+	font-weight:500;
+	cursor:context-menu;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+#morenav button{
+	height:40px;
+	width:40px;
+	margin:5px 0 0 5px;
+	outline:none;
+	border-radius:50%;
+	border:none;
+	background:transparent;
+	color:var(--c1);
+	float:left;
+}
+#morenav button:hover{
+	background:var(--b4);
+}
+#morenav button:active{
+	background:var(--b3);
+}
+#morenav button i{
+	font-size:24px;
+	line-height:38px;
+}
+.morediv #container{
+	/*border:1px solid#000;*/
+	height:calc(100% - 100px);
+	width:100%;
+	margin-top:20px;
+	border-radius:15px;
+	background: transparent;
+	overflow:hidden;
+	overflow-y:auto;
+ padding:15px 0 15px 0;
+}
+.morediv #container #child{
+	/*border:1px solid#000;*/
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	width:100%;
+	height:50px;
+	float:left;
+}
+.morediv #container #child:hover{
+	background:var(--b4);
+}
+.morediv #container #child:active{
+	background:var(--b6);
+}
+.morediv #container #child font{
+	float:left;
+	line-height:50px;
+	font-size:16px;
+	font-weight:550;
+	font-family:quicksand;
+	margin-left:10px;
+}
+.morediv #container #child i{
+	float:left;
+	line-height:50px;
+	font-size:28px;
+	margin-left:10px;
+}
+
+
+@media only screen and (max-height : 330px) {
+	 .drpdn{
+		 height:95px;
+		 overflow:hidden;
+		 overflow-y:auto;
+		 width:224px;
+		 border-radius:7px 4px 4px 7px;
+	 }
+}
+
+
+
+
+
+
+
+
+@keyframes fade-in {
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+#cmdbox{
+	display:none;
+	width:250px;
+	padding:10px;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	background:rgb(180,180,180);
+	border-top:2px solid #fff;
+	border-left:2px solid #fff;
+	border-bottom:2px solid #333;
+	border-right:2px solid #333;
+	box-shadow:1px 1px 5px var(--s2);
+	z-index:50;
+}
+#cmdbox *::selection{
+	color:#fff;
+	background:rgb(0,0,126);
+}
+#cmdbox input{
+	width:calc(100% - 8px);
+	height:20px;
+	border-bottom:2px solid #fff;
+	border-right:2px solid #fff;
+	border-top:2px solid #333;
+	border-left:2px solid #333;
+	font-family:ubuntu;
+	outline:none;
+	color:#000;
+}
+#cmdbox button{
+	width:100%;
+	height:25px;
+	margin-top:10px;
+	border-bottom:2px solid #333;
+	border-right:2px solid #333;
+	border-top:1px solid #333;
+	border-left:1px solid #333;
+	font-family:ubuntu;
+	outline:none;
+	color:#000;
+	background:rgb(180,180,180);
+}
+#cmdbox button:hover{
+	color:#fff;
+	background:rgb(0,0,126);
+	border:none;
+}
+#cmdbox #cmdresult{
+	display:none;
+	width:calc(100% - 4px);
+	min-height:20px;
+	max-height:100px;
+	background:#fff;
+	border-bottom:2px solid #fff;
+	border-right:2px solid #fff;
+	border-top:2px solid #333;
+	border-left:2px solid #333;
+	font-family:ubuntu;
+	outline:none;
+	color:#000;
+	margin-top:10px;
+	word-wrap: break-word;
+	overflow:hidden;
+	overflow-y:auto;
+}
+/* width */
+#cmdbox ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+}
+
+/* Track */
+#cmdbox ::-webkit-scrollbar-track {
+    background:rgb(180,180,180); 
+}
+ 
+/* Handle */
+#cmdbox ::-webkit-scrollbar-thumb {
+	border-radius:0px;
+    background: rgb(180,180,180); 
+	border-bottom:2px solid #333;
+	border-right:2px solid #333;
+	border-top:1px solid #fff;
+	border-left:1px solid #fff;
+}
+
+/*icons*/
+/* fallback 
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(woff2.woff2) format('woff2');
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}*/
+.material-symbols-outlined {
+	font-variation-settings:
+	'FILL' 0,
+	'wght' 270,
+	'GRAD' 0,
+	'opsz' 24;
+}
+</style>
+</html>
