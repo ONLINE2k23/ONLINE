@@ -21,12 +21,9 @@ function main() {
 		document.body.classList.toggle("phone");
 		document.getElementById("brandfont").style.display = "none";
 		document.getElementById("navcendiv").style.maxWidth = "calc(100% - 165px)";
-		document.getElementById("navcendiv").style.whiteSpace = "nowrap";
-		document.getElementById("navcendiv").style.overflow = "hidden";
-		document.getElementById("navcendiv").style.textOverflow = "ellipsis";
-		document.getElementById("titledropdni").style.float = "right";
-		document.getElementById("titledropdni").style.marginLeft = "7px";
-		document.getElementById("titledropdni").style.marginRight = "0px";
+		document.getElementById("noteTitle").style.whiteSpace = "nowrap";
+		document.getElementById("noteTitle").style.overflow = "hidden";
+		document.getElementById("noteTitle").style.textOverflow = "ellipsis";
 	}
 	else {}
 }
@@ -153,21 +150,21 @@ function cmdrun() {
 		}
 		function opnote1() {
 			document.getElementById("noteTitle").innerHTML = "Note 1";
-			document.getElementById("mainnote").value = localStorage.getItem("onnoNote1");
+			document.getElementById("mainnote").value = localStorage.getItem("onnoNote 1");
 			document.getElementById("notetitledropdown").style.display = "none";
 			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
 			document.getElementById("titledropdni").style.animationName = "titledropdni2";
 		}
 		function opnote2() {
 			document.getElementById("noteTitle").innerHTML = "Note 2";
-			document.getElementById("mainnote").value = localStorage.getItem("onnoNote2");
+			document.getElementById("mainnote").value = localStorage.getItem("onnoNote 2");
 			document.getElementById("notetitledropdown").style.display = "none";
 			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
 			document.getElementById("titledropdni").style.animationName = "titledropdni2";
 		}
 		function opnote3() {
 			document.getElementById("noteTitle").innerHTML = "Note 3";
-			document.getElementById("mainnote").value = localStorage.getItem("onnoNote3");
+			document.getElementById("mainnote").value = localStorage.getItem("onnoNote 3");
 			document.getElementById("notetitledropdown").style.display = "none";
 			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
 			document.getElementById("titledropdni").style.animationName = "titledropdni2";
@@ -263,9 +260,9 @@ function clearNote() {
 
 <div id="savenotebox" class="savenotebox">
 <label>Save Note as</label><br><br>
-<button class="button" onclick="savenamein.value='Note1'">Note 1</button>
-<button class="button" onclick="savenamein.value='Note2'">Note 2</button>
-<button class="button" onclick="savenamein.value='Note3'">Note 3</button>
+<button class="button" onclick="savenamein.value='Note 1'">Note 1</button>
+<button class="button" onclick="savenamein.value='Note 2'">Note 2</button>
+<button class="button" onclick="savenamein.value='Note 3'">Note 3</button>
 <label>or</label>
 <input type="text" name="savenamein" id="savenamein" placeholder="Enter Note Title/Key(Page1 etc.)"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
 <button onclick="savenote()" id="crtbt1">Save</button>
@@ -293,9 +290,9 @@ function clearNote() {
 
 <div id="delnotebox" class="delnotebox">
 <label>Delete Note</label><br><br>
-<button class="button" onclick="delnamein.value='Note1'">Note 1</button>
-<button class="button" onclick="delnamein.value='Note2'">Note 2</button>
-<button class="button" onclick="delnamein.value='Note3'">Note 3</button>
+<button class="button" onclick="delnamein.value='Note 1'">Note 1</button>
+<button class="button" onclick="delnamein.value='Note 2'">Note 2</button>
+<button class="button" onclick="delnamein.value='Note 3'">Note 3</button>
 <label>or</label>
 <input type="text" name="delnamein" id="delnamein" placeholder="Enter Note Title/Key(Page1 etc.)"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
 <button onclick="delnote()" id="crtbt1">Delete</button>
@@ -316,9 +313,44 @@ function clearNote() {
 			var delKey = document.getElementById("delnamein");
 			localStorage.removeItem("onno" + delKey.value);
 			document.getElementById("delnamein").value = "";
+			document.getElementById("noteTitle").innerHTML = "";
+			document.getElementById("mainnote").value = "";
+			document.getElementById("openBt").click();
 		}
 </script>
 </div>
+
+<div id="rennotebox" class="rennotebox">
+<label>Rename Key</label>
+<input type="text" id="renkeyin1" placeholder="Enter Old Key Name"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+<input type="text" id="renkeyin2" placeholder="Enter New Key Name"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+<button onclick="renameKey()" id="crtbt1">Rename</button>
+<button onclick="clrenamekey()" id="crtbt2">Cancel</button>
+<script>
+		function oprenamekey() {
+			document.getElementById("rennotebox").style.display = "block";
+			document.getElementById("drpdncl").click();
+			document.getElementById("renkeyin1").focus();
+			document.getElementById("morediv").style.display = "none";
+		}
+		function clrenamekey() {
+			document.getElementById("rennotebox").style.display = "none";
+			document.getElementById("renkeyin1").value = "";
+			document.getElementById("renkeyin2").value = "";
+		}
+		function renameKey(){
+			document.getElementById("rennotebox").style.display = "none";
+			var oldKey = document.getElementById("renkeyin1");
+			var newKey = document.getElementById("renkeyin2");
+			var oldKeyContent = localStorage.getItem("onno" + oldKey.value);
+			localStorage.setItem("onno" + newKey.value, oldKeyContent);
+			localStorage.removeItem("onno" + oldKey.value);
+			document.getElementById("renkeyin1").value = "";
+			document.getElementById("renkeyin2").value = "";
+		}
+</script>
+</div>
+
 
 <div id="morediv" class="morediv">
 <script>
@@ -336,13 +368,13 @@ function closemorediv() {
 <div id="child" onclick="opcreatenotebox()"><i class="material-symbols-outlined" style="color:#f03;">add</i><font>Create New Note</font></div>
 <div id="child" onclick="opsavenotebox()"><i class="material-symbols-outlined" style="color:#93f;">save</i><font>Save Note by Key Name</font></div>
 <div id="child" onclick="opdelnotebox()"><i class="material-symbols-outlined" style="color:#3c3;">delete</i><font>Delete Note by Key Name</font></div>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#063;">delete_sweep</i><font>Delete Multiple Notes at once</font></div>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#f55;">delete_forever</i><font>Delete All Data and Settings</font></div>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#f60;">edit</i><font>Rename Key</font></div>
+<!--<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#063;">delete_sweep</i><font>Delete Multiple Notes at once</font></div>-->
+<div id="child" onclick="localStorage.cler()"><i class="material-symbols-outlined" style="color:#f55;">delete_forever</i><font>Delete All Data</font></div>
+<div id="child" onclick="oprenamekey()"><i class="material-symbols-outlined" style="color:#f60;">edit</i><font>Rename Key</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#333;">history</i><font>Key History</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#96c;">checklist</i><font>Commits</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#06f;">encrypted</i><font>Locker Notes</font></div>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#096;">person</i><font>Contact Developer</font></div>
+<a href="mailto:schanpreetsingh859@gmail.com" target="_blank"><div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#096;">person</i><font style="color:var(--c1);">Contact Developer</font></div></a>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#039;">info</i><font>About</font></div>
 </div>
 </div>
@@ -516,7 +548,7 @@ function closemorediv() {
 	min-width:60px;*/
 }
 #navcendiv i{
-	float:left;
+	float:right;
 	line-height:50px;
 	margin-left:7px;
 	margin-right:0px;
@@ -589,7 +621,7 @@ function closemorediv() {
 	margin-left:5px;
 }
 .mainnote{
-	position: absolute;
+	position:fixed;
 	bottom:10px;
 	left:50%;
 	transform:translate(-50%, 0);
@@ -609,7 +641,7 @@ function closemorediv() {
 	text-align:justify;
 }
 .toolbar{
-	position: absolute;
+	position:fixed;
 	bottom:20px;
 	left:50%;
 	transform:translate(-50%, 0);
@@ -1012,6 +1044,85 @@ function closemorediv() {
 	background:var(--b4);
 }
 #delnotebox #crtbt2:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+
+/*rename key*/
+#rennotebox{
+	display:none;
+	width:250px;
+	/*height:100px;*/
+	background:var(--b3);
+	box-shadow:0 0 5px #000;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	border-radius:7px;
+	animation-name:fade-in;
+	animation-duration:0.8s;
+	animation-iteration-count:1;
+	animation-timming-function:linear;
+	padding:0 10px 10px 10px;
+	z-index:11;
+}
+#rennotebox label{
+	margin-top:10px;
+	float:left;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:600;
+}
+#rennotebox input{
+	border:none;
+	outline:none;
+	width:calc(100% - 4px);
+	height:25px;
+	color:var(--c1);
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	margin-top:10px;
+	background:var(--b5);
+	border-radius:4px;
+}
+#rennotebox button{
+	width:120px;
+	height:30px;
+	border-radius:5px;
+	float:left;
+	margin-top:10px;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	outline:none;
+	background:transparent;
+	color:var(--c1);
+}
+#rennotebox #crtbt1{
+	border:2px solid var(--b6);
+}
+#rennotebox #crtbt1:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#rennotebox #crtbt1:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
+#rennotebox #crtbt2{
+	margin-left:10px;
+	border:2px solid var(--b3);
+}
+#rennotebox #crtbt2:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#rennotebox #crtbt2:active{
 	border:2px solid var(--b6);
 	background:var(--b6);
 }
