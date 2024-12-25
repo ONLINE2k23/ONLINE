@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>ONLINE Notes</title>
-<link rel="icon" href="https://chanpreetsingh16.github.io/ONLINE/onno1.png">
+<link rel="icon" href="logo/onno1.png">
 <link rel="stylesheet" href="onnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,7 +109,7 @@ function cmdrun() {
 <div id="nav1">
 
 <div id="brand">
-<img src="https://chanpreetsingh16.github.io/ONLINE/onno1.png">
+<img src="logo/onno1.png">
 <font id="brandfont">ONLINE Notes</font>
 </div>
 
@@ -174,6 +174,7 @@ function cmdrun() {
 		}
 		function opkeynotebox() {
 			document.getElementById("keynotebox").style.display = "block";
+			document.getElementById("morediv").style.display = "none";
 			document.getElementById("drpdncl").click();
 			document.getElementById("keynamein").focus();
 		}
@@ -244,6 +245,7 @@ function clearNote() {
 			document.getElementById("crtnotebox").style.display = "block";
 			document.getElementById("drpdncl").click();
 			document.getElementById("crtnamein").focus();
+			document.getElementById("morediv").style.display = "none";
 		}
 		function clcreatenotebox() {
 			document.getElementById("crtnotebox").style.display = "none";
@@ -273,6 +275,7 @@ function clearNote() {
 			document.getElementById("savenotebox").style.display = "block";
 			document.getElementById("drpdncl").click();
 			document.getElementById("savenamein").focus();
+			document.getElementById("morediv").style.display = "none";
 		}
 		function clsavenotebox() {
 			document.getElementById("savenotebox").style.display = "none";
@@ -302,6 +305,7 @@ function clearNote() {
 			document.getElementById("delnotebox").style.display = "block";
 			document.getElementById("drpdncl").click();
 			document.getElementById("delnamein").focus();
+			document.getElementById("morediv").style.display = "none";
 		}
 		function cldelnotebox() {
 			document.getElementById("delnotebox").style.display = "none";
@@ -328,13 +332,15 @@ function closemorediv() {
 <div id="morenav"><button onclick="closemorediv()"><i class="material-symbols-outlined">arrow_back</i></button>&nbsp;&nbsp;More Actions</div>
 
 <div id="container">
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#036;">key</i><font>Open Note by Key Name</font></div>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#f03;">add</i><font>Create New Note</font></div>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#93f;">save</i><font>Save Note by Key Name</font></div>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#3c3;">delete</i><font>Delete Note by Key Name</font></div>
+<div id="child" onclick="opkeynotebox()"><i class="material-symbols-outlined" style="color:#43889e;">key</i><font>Open Note by Key Name</font></div>
+<div id="child" onclick="opcreatenotebox()"><i class="material-symbols-outlined" style="color:#f03;">add</i><font>Create New Note</font></div>
+<div id="child" onclick="opsavenotebox()"><i class="material-symbols-outlined" style="color:#93f;">save</i><font>Save Note by Key Name</font></div>
+<div id="child" onclick="opdelnotebox()"><i class="material-symbols-outlined" style="color:#3c3;">delete</i><font>Delete Note by Key Name</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#063;">delete_sweep</i><font>Delete Multiple Notes at once</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#f55;">delete_forever</i><font>Delete All Data and Settings</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#f60;">edit</i><font>Rename Key</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#333;">history</i><font>Key History</font></div>
+<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#96c;">checklist</i><font>Commits</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#06f;">encrypted</i><font>Locker Notes</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#096;">person</i><font>Contact Developer</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#039;">info</i><font>About</font></div>
@@ -353,7 +359,7 @@ function closemorediv() {
 </div>
 </body>
 <style>
-:root{
+	:root{
 	--b1:rgb(240,240,240);
 	--b2:rgb(20,20,20);
 	--b3:rgb(215,215,215);
