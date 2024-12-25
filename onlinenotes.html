@@ -118,6 +118,7 @@ function cmdrun() {
 	<div class="drpdnchild" onclick="opnote3()"><i class="material-symbols-outlined">article</i>Note 3</div>
 	<div class="drpdnchild" id="openBt" onclick="opkeynotebox()"><i class="material-symbols-outlined">key</i><font>Open by Note Key Name</font></div>
 	<div class="drpdnchild" onclick="opcreatenotebox()"><i class="material-symbols-outlined">add</i><font>Create New Note</font></div>
+	<div class="drpdnchild" onclick="copyNoteTitle()"><i class="material-symbols-outlined">content_copy</i><font>Copy This Note Key</font></div>
 	<div class="drpdnchild" id="drpdncl" onclick="cldrpdn()"><i class="material-symbols-outlined">close</i><font>Close</font></div>
 	
 	<script>
@@ -193,6 +194,12 @@ function cmdrun() {
 				document.getElementById("mainnote").value = localStorage.getItem("onno" + key.value);
 				document.getElementById("keynamein").value = "";
 			}
+		}
+		function copyNoteTitle() {
+			var key = document.getElementById("noteTitle");
+			window.navigator.clipboard.writeText(key.textContent);
+			document.getElementById("morediv").style.display = "none";
+			document.getElementById("drpdncl").click();
 		}
 	</script>
 </div>
