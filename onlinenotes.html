@@ -94,7 +94,7 @@ function cmdrun() {
 		document.getElementById("cmdresult").innerHTML = "No need to run the command.";
 	}
 	else if(cmdcmd.value === "user?_authentic/q=var.getCommandFor = about*/#") {
-		document.getElementById("cmdresult").innerHTML = "<b>Version:</b> ONLINE Notes V1 20.11.2024 ©ONLINE2023<br><br> <b>Company:</b> ©ONLINE2023<br><br> <b>Developer:</b> Chanpreet Singh<br><br> <b>Supported Screen Width:</b> min.290px";
+		document.getElementById("cmdresult").innerHTML = "<b>Version:</b> ONLINE Notes V1 20.11.2024 ©ONLINE2023<br><br> <b>Company:</b> ©ONLINE2023<br><br> <b>Developer:</b> Chanpreet Singh<br><br> <b>Supported Screen Width:</b> min.330px<br><br>";
 	}
 	else{
 		document.getElementById("cmdresult").innerHTML = "void";
@@ -201,7 +201,48 @@ function cmdrun() {
 			document.getElementById("morediv").style.display = "none";
 			document.getElementById("drpdncl").click();
 		}
+		function about() {
+			document.getElementById("morediv").style.display = "none";
+			document.getElementById("drpdncl").click();
+			document.getElementById("noteTitle").innerHTML = "About";
+			var abt = document.getElementById("about");
+			document.getElementById("mainnote").innerHTML = abt.textContent;
+		}
 	</script>
+	<div id="about" style="display:none;">
+Developed by : ©ONLINE2023; 
+
+Version : V1 20.11.2024; 
+
+Coding Lanuages used : HTML, CSS, JS.; 
+
+Developer Name : Chanpreet Singh; 
+
+Buildup Start date : 20/11/2024; 
+
+Buildup Finish date : ; 
+
+Total days spent for buildup : ; 
+
+Best Supported by : Google Chrome; 
+
+Developed on : Windows 7; 
+
+Developed in : Notepad++; 
+
+Updated on : 20th November, 2024; 
+
+Lanuage used : English; 
+
+Comaptible Device(s) : Computer, Laptop, Tablet, Phone; 
+
+Total Memory : ; 
+
+Rating : 5; 
+
+©ONLINE2023 ; IMAGES & CONTENT MAY BE SUBJECT TO COPYRIGHT.
+WEBSITE CODED ON - 02:35 pm Wednesday, 20 November 2024 (IST).
+</div>
 </div>
 
 <button id="navrhtbt" onclick="openMoreActions()" title="More Actions"><i class="material-symbols-outlined">apps</i></button>
@@ -376,16 +417,33 @@ function closemorediv() {
 <div id="child" onclick="opsavenotebox()"><i class="material-symbols-outlined" style="color:#93f;">save</i><font>Save Note by Key Name</font></div>
 <div id="child" onclick="opdelnotebox()"><i class="material-symbols-outlined" style="color:#3c3;">delete</i><font>Delete Note by Key Name</font></div>
 <!--<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#063;">delete_sweep</i><font>Delete Multiple Notes at once</font></div>-->
-<div id="child" onclick="localStorage.clear()"><i class="material-symbols-outlined" style="color:#f55;">delete_forever</i><font>Delete All Data</font></div>
+<div id="child" onclick="delwarn()"><i class="material-symbols-outlined" style="color:#f55;">delete_forever</i><font>Delete All Data</font></div>
 <div id="child" onclick="oprenamekey()"><i class="material-symbols-outlined" style="color:#f60;">edit</i><font>Rename Key</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#333;">history</i><font>Key History</font></div>
 <div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#96c;">checklist</i><font>Commits</font></div>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#06f;">encrypted</i><font>Locker Notes</font></div>
+<!--<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#06f;">encrypted</i><font>Locker Notes</font></div>-->
 <a href="mailto:schanpreetsingh859@gmail.com" target="_blank"><div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#096;">person</i><font style="color:var(--c1);">Contact Developer</font></div></a>
-<div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#039;">info</i><font>About</font></div>
+<div id="child" onclick="about()"><i class="material-symbols-outlined" style="color:#039;">info</i><font>About</font></div>
 </div>
 </div>
 
+<div id="delwarning">
+<i class="material-symbols-outlined">warning</i><font>Are you sure to Delete All Data?</font><br>
+<button onclick="clearAll()" id="crtbt1">Delete</button>
+<button onclick="cldelwarn()" id="crtbt2">Cancel</button>
+<script>
+function delwarn() {
+	document.getElementById("delwarning").style.display = "block";
+	document.getElementById("drpdncl").click();
+}
+function cldelwarn() {
+	document.getElementById("delwarning").style.display = "none";
+}
+function clearAll() {
+	localStorage.clear();
+}
+</script>
+</div>
 
 <div id="cmdbox">
 <input type="text" id="commandinput" placeholder="Enter Command Code" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
@@ -891,7 +949,7 @@ function closemorediv() {
 	border:2px solid var(--b6);
 }
 #savenotebox .button:hover{
-	border:2px solid var(--b4);
+	border:2px solid var(--b5);
 	background:var(--b4);
 }
 #savenotebox .button:active{
@@ -993,7 +1051,7 @@ function closemorediv() {
 	border:2px solid var(--b6);
 }
 #delnotebox .button:hover{
-	border:2px solid var(--b4);
+	border:2px solid var(--b5);
 	background:var(--b4);
 }
 #delnotebox .button:active{
@@ -1226,6 +1284,87 @@ function closemorediv() {
 	margin-left:10px;
 }
 
+/*delete warning*/
+#delwarning{
+	display:none;
+	width:310px;
+	/*height:100px;*/
+	background:var(--b3);
+	box-shadow:0 0 5px #000;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	border-radius:7px;
+	animation-name:fade-in;
+	animation-duration:0.8s;
+	animation-iteration-count:1;
+	animation-timming-function:linear;
+	padding:10px;
+	z-index:12;
+}
+#delwarning i{
+	float:left;
+	line-height:65px;
+	font-size:40px;
+	user-select:none;
+	webkit-user-select:none;
+	ms-user-select:none;
+	font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 400,'opsz' 24;
+	color:#f33;
+}
+#delwarning font{
+	float:left;
+	line-height:65px;
+	margin-left:5px;
+	user-select:none;
+	webkit-user-select:none;
+	ms-user-select:none;
+	font-family:quicksand;
+	font-size:17px;
+	font-weight:550;
+}
+#delwarning button{
+	width:150px;
+	height:30px;
+	border-radius:5px;
+	float:left;
+	margin-top:10px;
+	font-family:quicksand;
+	font-size:15px;
+	line-height:20px;
+	font-weight:500;
+	outline:none;
+	background:transparent;
+	color:var(--c1);
+	font-weight:550;
+}
+#delwarning #crtbt1{
+	border:2px solid var(--b8);
+	color:var(--b8);
+}
+#delwarning #crtbt1:hover{
+	border:2px solid var(--b8);
+	background:var(--b9);
+	color:var(--fff);
+}
+#delwarning #crtbt1:active{
+	border:2px solid var(--b10);
+	background:var(--b10);
+	color:#fff;
+}
+#delwarning #crtbt2{
+	margin-left:10px;
+	border:2px solid var(--b3);
+}
+#delwarning #crtbt2:hover{
+	border:2px solid var(--b4);
+	background:var(--b4);
+}
+#delwarning #crtbt2:active{
+	border:2px solid var(--b6);
+	background:var(--b6);
+}
 
 @media only screen and (max-height : 330px) {
 	 .drpdn{
@@ -1236,8 +1375,6 @@ function closemorediv() {
 		 border-radius:7px 4px 4px 7px;
 	 }
 }
-
-
 
 
 
