@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>ONLINE Notes</title>
-<link rel="icon" href="https://chanpreetsingh16.github.io/ONLINE/onno1.png">
+<link rel="icon" href="logo/onno1.png">
 <link rel="stylesheet" href="onnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,7 +125,7 @@ function cmdrun() {
 <div id="nav1">
 
 <div id="brand">
-<img src="https://chanpreetsingh16.github.io/ONLINE/onno1.png">
+<img src="logo/onno1.png">
 <font id="brandfont">ONLINE Notes</font>
 </div>
 
@@ -520,11 +520,22 @@ function clkeyhis() {
 	document.getElementById("keyHis").style.display = "none";
 	var keyhi = document.getElementById("keyhista");
 	localStorage.setItem("onnokeyhis2", keyhi.value);
-	localStorage.setItem("onnokeyhis3", keyhi.value);
 }
 function delkeyhis() {
-	localStorage.removeItem("onnokeyhis2");
+	var kh = document.getElementById("keyhista");
+	
+	if(kh.value === "") {
+		localStorage.removeItem("onnokeyhis2");
+	}
+	else if(kh.value === " ") {
+		localStorage.removeItem("onnokeyhis2");
+	}
+	else {
+		localStorage.setItem("onnokeyhis3", kh.value);
+		localStorage.removeItem("onnokeyhis2");
+	}
 	document.getElementById("keyHis").style.display = "none";
+	document.getElementById("keyhista").value = "";
 }
 </script>
 
@@ -551,6 +562,7 @@ function clcomm() {
 function delcomm() {
 	localStorage.removeItem("onnocomm2");
 	document.getElementById("commitsdiv").style.display = "none";
+	document.getElementById("commitmain").innerHTML = "";
 }
 </script>
 
@@ -1887,6 +1899,6 @@ function delcomm() {
 	'GRAD' 0,
 	'opsz' 24;
 }
-/*1893*/
+/*1904*/
 </style>
 </html>
