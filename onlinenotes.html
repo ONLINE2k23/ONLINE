@@ -91,13 +91,29 @@ function cmdrun() {
 	
 	if(cmdcmd.value === "user?_authentic/q=var.getCommandFor = all*/#") {
 		document.getElementById("cmdresult").innerHTML = "<b>user?_authentic/q=var.getCommandFor = all*/#</b> - (To Get All Available Commands)" + 
-		"<br><br><b>9041694176</b> - (For Context Menu Enabling)" + "<br><br><b>user?_authentic/q=var.getCommandFor = about*/#</b> - (To Get About Information)";
+		"<br><br><b>9041694176</b> - (For Context Menu Enabling)" + "<br><br><b>user?_authentic/q=var.getCommandFor = about*/#</b> - (To Get About Information)"
+		+ "<br><br><b>user?_authentic/q=var.getCommandFor = keyHistory1*/#</b> - (For all key history)" + "<br><br><b>user?_authentic/q=var.getCommandFor = keyHistory2*/#</b> - (For key history)"
+		+ "<br><br><b>user?_authentic/q=var.getCommandFor = commits*/#</b> - (For commits)";
 	}
 	else if(cmdcmd.value === "9041694176") {
 		document.getElementById("cmdresult").innerHTML = "No need to run the command.";
 	}
 	else if(cmdcmd.value === "user?_authentic/q=var.getCommandFor = about*/#") {
 		document.getElementById("cmdresult").innerHTML = "<b>Version:</b> ONLINE Notes V1 20.11.2024 ©ONLINE2023<br><br> <b>Company:</b> ©ONLINE2023<br><br> <b>Developer:</b> Chanpreet Singh<br><br> <b>Supported Screen Width:</b> min.330px<br><br>";
+	}
+	else if(cmdcmd.value === "user?_authentic/q=var.getCommandFor = commits*/#") {
+		document.getElementById("cmdbox").style.display = "none";
+		document.getElementById("cmdresult").style.display = "none";
+		document.getElementById("commandinput").value = "";
+		document.getElementById("cmdresult").innerHTML = "";
+		document.getElementById("commitsdiv").style.display = "block";
+		document.getElementById("commitmain").innerHTML = localStorage.getItem("onnocomm1");
+	}
+	else if(cmdcmd.value === "user?_authentic/q=var.getCommandFor = keyHistory1*/#") {
+		document.getElementById("cmdresult").innerHTML = localStorage.getItem("onnokeyhis1");
+	}
+	else if(cmdcmd.value === "user?_authentic/q=var.getCommandFor = keyHistory2*/#") {
+		document.getElementById("cmdresult").innerHTML = localStorage.getItem("onnokeyhis3");
 	}
 	else{
 		document.getElementById("cmdresult").innerHTML = "void";
@@ -113,7 +129,7 @@ function cmdrun() {
 <font id="brandfont">ONLINE Notes</font>
 </div>
 
-<div id="navcendiv" onclick="opendrpdn()"><font id="noteTitle">Note 1</font><i class="material-symbols-outlined" id="titledropdni">keyboard_arrow_down</i></div>
+<div id="navcendiv" onclick="opendrpdn()"><font id="noteTitle"></font><i class="material-symbols-outlined" id="titledropdni">keyboard_arrow_down</i></div>
 
 <div id="notetitledropdown" class="drpdn">
 	<div class="drpdnchild" onclick="opnote1()"><i class="material-symbols-outlined">article</i>Note 1</div>
@@ -217,7 +233,7 @@ function cmdrun() {
 <button id="navrhtbt" onclick="openMoreActions()" title="More Actions"><i class="material-symbols-outlined">apps</i></button>
 </div>
 
-<textarea class="mainnote" id="mainnote" placeholder="Write Here!" onclick="cldrpdn()" oncontextmenu="cldrpdn()" autofocus></textarea>
+<textarea class="mainnote" id="mainnote" placeholder="Write Here!" onclick="cldrpdn()" oncontextmenu="cldrpdn()"></textarea>
 
 <div class="toolbar">
 <button onclick="opsavenotebox()" title="Save Note" id="saveBt"><i class="material-symbols-outlined">save</i></button>
@@ -244,7 +260,7 @@ function clearNote() {
 
 <div id="keynotebox" class="keynotebox">
 <label>Open Note by Key Name</label>
-<input type="text" id="keynamein" placeholder="Enter Key Name(like Note1 etc.)"autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+<input type="text" id="keynamein" placeholder="Enter Key Name(like Note1 etc.)" autofocus autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
 <button onclick="opnotebyKey()" id="keybt1">Open</button>
 <button onclick="clkeynotbox()" id="keybt2">Close</button>
 </div>
@@ -464,6 +480,10 @@ function clabt() {
 	document.getElementById("abtdiv").style.display = "none";
 }
 </script>
+
+<i id="i" class="material-symbols-outlined" style="color:#039;">info</i>
+<font>About</font>
+
 <button onclick="clabt()"><i class="material-symbols-outlined">close</i></button>
 
 <div id="abtmain">
@@ -472,15 +492,14 @@ function clabt() {
   Coding Lanuages used : HTML, CSS, JS.<br><br>
   Developer Name : Chanpreet Singh<br><br>
   Buildup Start date : 20/11/2024<br><br>
-  Buildup Finish date : <br><br>
-  Total days spent for buildup : <br><br>
+  Buildup Finish date : 29/12/2024<br><br>
+  Total days spent for buildup : 40 Days<br><br>
   Best Supported by : Google Chrome<br><br>
   Developed on : Windows 7<br><br>
   Developed in : Notepad++<br><br>
   Updated on : 20<sup>th</sup> November, 2024<br><br>
   Lanuage used : English<br><br>
   Comaptible Device(s) : Computer, Laptop, Tablet, Phone<br><br>
-  Total Memory : <br><br>
   Rating : 5  <span class="fa fa-star"></span> <span class="fa fa-star"></span> <span class="fa fa-star"></span> 
   <span class="fa fa-star"></span> <span class="fa fa-star"></span><br><br>
   
@@ -500,8 +519,8 @@ function keyhis() {
 function clkeyhis() {
 	document.getElementById("keyHis").style.display = "none";
 	var keyhi = document.getElementById("keyhista");
-	localStorage.setItem("onnokeyhis1", keyhi.value);
 	localStorage.setItem("onnokeyhis2", keyhi.value);
+	localStorage.setItem("onnokeyhis3", keyhi.value);
 }
 function delkeyhis() {
 	localStorage.removeItem("onnokeyhis2");
@@ -860,7 +879,7 @@ function delcomm() {
 }
 /*opnote*/
 #keynotebox{
-	display:none;
+	/*display:none;*/
 	width:250px;
 	/*height:100px;*/
 	background:var(--b3);
@@ -1497,12 +1516,22 @@ function delcomm() {
 	width:0px;
 	height:0px;
 }
+.abtdiv #i{
+	float:left;
+	margin:0px 0 0 15px;
+	line-height:50px;
+}
+.abtdiv font{
+	float:left;
+	margin:0px 0 0 5px;
+	line-height:50px;
+}
 #abtmain{
 	position:fixed;
-	top:65px;
+	top:75px;
 	left:30px;
 	width:calc(100% - 80px);
-	height:calc(100% - 117px);
+	height:calc(100% - 127px);
 	overflow:hidden;
 	overflow-y:auto;
 	background:var(--b3);
@@ -1515,10 +1544,18 @@ function delcomm() {
 	width:40px;
 	border:none;
 	outline:none;
+	margin:5px 5px 0 0;
+	border-radius:50%;
 	background:transparent;
 }
-.abtdiv button:active i{
-	color:#f00;
+.abtdiv button i{
+	line-height:29px;
+}
+.abtdiv button:hover{
+	background:var(--b4);
+}
+.abtdiv button:active{
+	background:var(--b3);
 }
 .abtdiv span{
 	color:#43889e;
@@ -1850,5 +1887,6 @@ function delcomm() {
 	'GRAD' 0,
 	'opsz' 24;
 }
+/*1893*/
 </style>
 </html>
