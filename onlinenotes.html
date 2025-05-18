@@ -29,6 +29,7 @@ function main() {
 	else {}
 	document.getElementById("keyhista").innerHTML = localStorage.getItem("onnokeyhis2");
 	document.getElementById("commitmain").innerHTML = localStorage.getItem("onnocomm2");
+	splitKN();
 }
 
 const div = document.getElementById("cont");
@@ -132,14 +133,17 @@ function cmdrun() {
 <div id="navcendiv" onclick="opendrpdn()"><font id="noteTitle"></font><i class="material-symbols-outlined" id="titledropdni">keyboard_arrow_down</i></div>
 
 <div id="notetitledropdown" class="drpdn">
-	<div class="drpdnchild" onclick="opnote1()"><i class="material-symbols-outlined">article</i>Note 1</div>
-	<div class="drpdnchild" onclick="opnote2()"><i class="material-symbols-outlined">article</i>Note 2</div>
-	<div class="drpdnchild" onclick="opnote3()"><i class="material-symbols-outlined">article</i>Note 3</div>
-	<div class="drpdnchild" id="openBt" onclick="opkeynotebox()"><i class="material-symbols-outlined">key</i><font>Open by Note Key Name</font></div>
-	<div class="drpdnchild" onclick="opcreatenotebox()"><i class="material-symbols-outlined">add</i><font>Create New Note</font></div>
-	<div class="drpdnchild" onclick="copyNoteTitle()"><i class="material-symbols-outlined">content_copy</i><font>Copy This Note Key</font></div>
-	<div class="drpdnchild" id="drpdncl" onclick="cldrpdn()"><i class="material-symbols-outlined">close</i><font>Close</font></div>
-	
+	<div class="drpdnchild" onclick="opnote('Note 1')"><i class="material-symbols-outlined">article</i>Note 1</div>
+	<div class="drpdnchild" onclick="opnote('Note 2')"><i class="material-symbols-outlined">article</i>Note 2</div>
+	<div class="drpdnchild" onclick="opnote('Note 3')"><i class="material-symbols-outlined">article</i>Note 3</div>
+	<span id="notetitledropdownspan"></span>
+	<div style="display:none;" class="drpdnchild" id="openBt" onclick="opkeynotebox()"><i class="material-symbols-outlined">key</i><font>Open by Note Key Name</font></div>
+	<div style="display:none;" class="drpdnchild" onclick="opcreatenotebox()"><i class="material-symbols-outlined">add</i><font>Create New Note</font></div>
+	<div style="display:none;" class="drpdnchild" onclick="copyNoteTitle()"><i class="material-symbols-outlined">content_copy</i><font>Copy This Note Key</font></div>
+	<div style="display:none;" class="drpdnchild" id="drpdncl" onclick="cldrpdn()"><i class="material-symbols-outlined">close</i><font>Close</font></div>
+
+</div>
+<div style="display:none;" id="buttonhtmlinner"><div class="drpdnchild" onclick="opnote('all')"><i class="material-symbols-outlined">article</i>all</div></div>
 	<script>
 		document.getElementById("notetitledropdown").style.display = "none";
 	
@@ -158,6 +162,20 @@ function cmdrun() {
 			}
 		}
 		
+		function splitKN(){
+		//<div class="drpdnchild" onclick="opnote('Note 1')"><i class="material-symbols-outlined">article</i>Note 1</div>
+			var allkeys = localStorage.getItem("onnokeyhis2");
+			var indkey1 = allkeys.split(",");
+			var len = indkey1.length - 1;
+			var newkey;
+			document.getElementById("notetitledropdownspan").innerHTML = "";
+			
+				for(i = 0; i < len; i++){
+					newkey = indkey1[i].replace(" ", "");
+					nwhtml = document.getElementById("buttonhtmlinner").innerHTML.replace(new RegExp("all", "g"), newkey);
+					document.getElementById("notetitledropdownspan").innerHTML += nwhtml;
+				}
+		}
 		function cldrpdn() {
 			const drpdnbox = document.getElementById("notetitledropdown");
 			
@@ -168,23 +186,9 @@ function cmdrun() {
 			}
 		else{}
 		}
-		function opnote1() {
-			document.getElementById("noteTitle").innerHTML = "Note 1";
-			document.getElementById("mainnote").value = localStorage.getItem("onnoNote 1");
-			document.getElementById("notetitledropdown").style.display = "none";
-			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
-			document.getElementById("titledropdni").style.animationName = "titledropdni2";
-		}
-		function opnote2() {
-			document.getElementById("noteTitle").innerHTML = "Note 2";
-			document.getElementById("mainnote").value = localStorage.getItem("onnoNote 2");
-			document.getElementById("notetitledropdown").style.display = "none";
-			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
-			document.getElementById("titledropdni").style.animationName = "titledropdni2";
-		}
-		function opnote3() {
-			document.getElementById("noteTitle").innerHTML = "Note 3";
-			document.getElementById("mainnote").value = localStorage.getItem("onnoNote 3");
+		function opnote(keyname) {
+			document.getElementById("noteTitle").innerHTML = keyname;
+			document.getElementById("mainnote").value = localStorage.getItem("onno" + keyname);
 			document.getElementById("notetitledropdown").style.display = "none";
 			document.getElementById("titledropdni").style.transform = "rotate(360deg)";
 			document.getElementById("titledropdni").style.animationName = "titledropdni2";
@@ -258,7 +262,7 @@ function clearNote() {
 </div>
 
 
-<div id="keynotebox" class="keynotebox">
+<div id="keynotebox" class="keynotebox" style="display:none;">
 <label>Open Note by Key Name</label>
 <input type="text" id="keynamein" placeholder="Enter Key Name(like Note1 etc.)" autofocus autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
 <button onclick="opnotebyKey()" id="keybt1">Open</button>
@@ -771,6 +775,9 @@ function delcomm() {
 .drpdn{
 	display:none;
 	width:217px;
+	max-height:calc(100% - 90px);
+	overflow:hidden;
+	overflow-y:auto;
 	padding:0 5px 5px 5px;
 	position:fixed;
 	top:70px;
