@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>ONLINE Notes</title>
-<link rel="icon" href="https://ONLINE2k23.github.io/ONLINE/onno2.png"">
+<link rel="icon" href="https://ONLINE2k23.github.io/ONLINE/onno2.png">
 <link rel="stylesheet" href="onnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +29,17 @@ function main() {
 	else {}
 	document.getElementById("keyhista").innerHTML = localStorage.getItem("onnokeyhis2");
 	document.getElementById("commitmain").innerHTML = localStorage.getItem("onnocomm2");
+	themeload();
 	splitKN();
+}
+function themeload() {
+	var mode = localStorage.getItem("onlnotheme");
+	
+	if(mode === "dark") {
+		document.getElementById("themei").innerHTML = "dark_mode";
+		document.body.classList.toggle("dark");
+	}
+	else{}
 }
 
 const div = document.getElementById("cont");
@@ -44,6 +54,10 @@ function right() {
 }
 document.onkeydown = (e) => {
 	const cmdbox = document.getElementById("cmdbox");
+	const svbox = document.getElementById("savenotebox");
+	const opbox = document.getElementById("keynotebox");
+	const crbox = document.getElementById("crtnotebox");
+	const renbox = document.getElementById("rennotebox");
 
     if (e.keyCode == 123) {
         e.preventDefault();
@@ -75,6 +89,22 @@ document.onkeydown = (e) => {
 	if(e.key === "Enter" && cmdbox.style.display === "block") {
 		event.preventDefault();
 		document.getElementById("cmdbt1").click();		
+	}
+	if(e.key === "Enter" && svbox.style.display === "block") {
+		event.preventDefault();
+		savenote();
+	}
+	if(e.key === "Enter" && opbox.style.display === "block") {
+		event.preventDefault();
+		opnotebyKey();
+	}
+	if(e.key === "Enter" && crbox.style.display === "block") {
+		event.preventDefault();
+		createnote();
+	}
+	if(e.key === "Enter" && renbox.style.display === "block") {
+		event.preventDefault();
+		renameKey();
 	}
 };
 function clcmdbox() {
@@ -126,7 +156,7 @@ function cmdrun() {
 <div id="nav1">
 
 <div id="brand">
-<img src="https://ONLINE2k23.github.io/ONLINE/onno2.png"">
+<img src="https://ONLINE2k23.github.io/ONLINE/onno2.png">
 <font id="brandfont">ONLINE Notes</font>
 </div>
 
@@ -144,7 +174,7 @@ function cmdrun() {
 
 </div>
 <div style="display:none;" id="buttonhtmlinner"><div class="drpdnchild" onclick="opnote('all')"><i class="material-symbols-outlined">article</i>all</div></div>
-	<script>
+<script>
 		document.getElementById("notetitledropdown").style.display = "none";
 	
 		function opendrpdn() {
@@ -161,7 +191,6 @@ function cmdrun() {
 				document.getElementById("titledropdni").style.animationName = "titledropdni2";
 			}
 		}
-		
 		function splitKN(){
 		//<div class="drpdnchild" onclick="opnote('Note 1')"><i class="material-symbols-outlined">article</i>Note 1</div>
 			var allkeys = localStorage.getItem("onnokeyhis2");
@@ -207,7 +236,7 @@ function cmdrun() {
 			document.getElementById("keynotebox").style.display = "none";
 			var key = document.getElementById("keynamein");	
 			var title = document.getElementById("noteTitle");	
-			if(key.value === "user?_authentic/q=var.getCommandFor = openCMD*/#") {
+			if(key.value === "user?_authentic/q=var.getCommandFor = cmd*/#") {
 				document.getElementById("cmdbox").style.display = "block";
 				document.getElementById("keynamein").value = "";
 				document.getElementById("noteTitle").innerHTML = title.textContent;
@@ -232,8 +261,6 @@ function cmdrun() {
 			document.getElementById("mainnote").innerHTML = abt.textContent;
 		}
 	</script>
-</div>
-
 <button id="navrhtbt" onclick="openMoreActions()" title="More Actions"><i class="material-symbols-outlined">apps</i></button>
 </div>
 
@@ -308,6 +335,7 @@ function clearNote() {
 			}
 			
 			document.getElementById("crtnamein").value = "";
+			splitKN();
 		}
 </script>
 </div>
@@ -345,6 +373,7 @@ function clearNote() {
 						
 			
 			document.getElementById("savenamein").value = "";
+			splitKN();
 		}
 </script>
 </div>
@@ -383,6 +412,7 @@ function clearNote() {
 			document.getElementById("noteTitle").innerHTML = "";
 			document.getElementById("mainnote").value = "";
 			document.getElementById("openBt").click();
+			splitKN();
 		}
 </script>
 </div>
@@ -424,6 +454,7 @@ function clearNote() {
 			
 			document.getElementById("renkeyin1").value = "";
 			document.getElementById("renkeyin2").value = "";
+			splitKN();
 		}
 </script>
 </div>
@@ -441,6 +472,7 @@ function closemorediv() {
 <div id="morenav"><button onclick="closemorediv()"><i class="material-symbols-outlined">arrow_back</i></button>&nbsp;&nbsp;More Actions</div>
 
 <div id="container">
+<div id="child" onclick="changetheme()"><i id="themei" class="material-symbols-outlined" style="color:#f39;">light_mode</i><font>Change Theme</font></div>
 <div id="child" onclick="opkeynotebox()"><i class="material-symbols-outlined" style="color:#43889e;">key</i><font>Open Note by Key Name</font></div>
 <div id="child" onclick="opcreatenotebox()"><i class="material-symbols-outlined" style="color:#f03;">add</i><font>Create New Note</font></div>
 <div id="child" onclick="opsavenotebox()"><i class="material-symbols-outlined" style="color:#93f;">save</i><font>Save Note by Key Name</font></div>
@@ -454,6 +486,20 @@ function closemorediv() {
 <a href="mailto:schanpreetsingh859@gmail.com" target="_blank"><div id="child" onclick="()"><i class="material-symbols-outlined" style="color:#096;">person</i><font style="color:var(--c1);">Contact Developer</font></div></a>
 <div id="child" onclick="abt()"><i class="material-symbols-outlined" style="color:#039;">info</i><font>About</font></div>
 </div>
+<script>
+function changetheme() {
+	document.body.classList.toggle("dark");
+	
+	if(document.body.classList.contains("dark")) {
+		document.getElementById("themei").innerHTML = "dark_mode";
+		localStorage.setItem("onlnotheme", "dark");
+	}
+	else{
+		document.getElementById("themei").innerHTML = "light_mode";
+		localStorage.removeItem("onlnotheme");
+	}
+}
+</script>
 </div>
 
 <div id="delwarning">
@@ -524,6 +570,7 @@ function clkeyhis() {
 	document.getElementById("keyHis").style.display = "none";
 	var keyhi = document.getElementById("keyhista");
 	localStorage.setItem("onnokeyhis2", keyhi.value);
+	splitKN();
 }
 function delkeyhis() {
 	var kh = document.getElementById("keyhista");
