@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+<head>
+<title>ONLINE Notes</title>
+<link rel="icon" href="logo/onno2.png">
+<link rel="stylesheet" href="nonnocss.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&family=Quicksand:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+</head>
+<body onload="main()">
+<script>
+function main() {
+	themeload();
+	//document.getElementById("keyhista").innerHTML = localStorage.getItem("onnokeyhis2");
+	//document.getElementById("commitmain").innerHTML = localStorage.getItem("onnocomm2");
+	//splitKN();
+}
+function themeload() {
+	var mode = localStorage.getItem("onlnotheme");
+	
+	if(mode === "dark") {
+		//document.getElementById("themei").innerHTML = "dark_mode";
+		document.body.classList.toggle("dark");
+	}
+	else{}
+}
+function right() {
+		window.event.preventDefault();
+}
+document.onkeydown = (e) => {
+	const cmdbox = document.getElementById("cmdbox");
+	const svbox = document.getElementById("savenotebox");
+	const opbox = document.getElementById("keynotebox");
+	const crbox = document.getElementById("crtnotebox");
+	const renbox = document.getElementById("rennotebox");
+
+    if (e.keyCode == 123) {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key == 'I') {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key == 'C') {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key == 'J') {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.key == 'U') {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.key == 's') {
+        e.preventDefault();		
+        document.getElementById("saveBt").click();
+    }
+    if (e.ctrlKey && e.key == 'o') {
+        e.preventDefault();		
+        document.getElementById("openBt").click();
+    }
+    if (e.ctrlKey && e.shiftKey && e.key == '%') {
+        document.getElementById("cmdbt3").click();
+		document.getElementById("commandinput").focus();
+    }
+	if(e.key === "Enter" && cmdbox.style.display === "block") {
+		event.preventDefault();
+		document.getElementById("cmdbt1").click();		
+	}
+	if(e.key === "Enter" && svbox.style.display === "block") {
+		event.preventDefault();
+		savenote();
+	}
+	if(e.key === "Enter" && opbox.style.display === "block") {
+		event.preventDefault();
+		opnotebyKey();
+	}
+	if(e.key === "Enter" && crbox.style.display === "block") {
+		event.preventDefault();
+		createnote();
+	}
+	if(e.key === "Enter" && renbox.style.display === "block") {
+		event.preventDefault();
+		renameKey();
+	}
+};
+</script>
+<div class="cont" id="cont" oncontextmenu="right()">
+	<div id="navbar">
+		<img src="logo/onno2.png"><font>ONLINE Notes</font>
+	</div>
+	
+	<div id="rht-src-ic" onclick="opsrh()">
+		<i class="material-symbols-outlined">search</i>
+		<script>
+			function opsrh(){
+				if(document.getElementById("navbar").style.display === "none"){
+					document.getElementById("srhbar").style.display = "none";
+					document.getElementById("navbar").style.animationName = "shrink";
+					document.getElementById("navbar").style.display = "block";
+				}
+				else{
+					document.getElementById("navbar").style.display = "none";
+					document.getElementById("srhbar").style.display = "block";
+				}
+				
+			}
+		</script>
+	</div>
+	
+	<div id="srhbar"></div>
+</div>
+</body>
+<style>
+:root{
+	--navback:rgba(255,255,255,.4);
+	--navbord:rgb(225,225,225);
+	--c1:#000;
+}
+.dark{
+	--navback:rgba(0,0,0,.7);
+	--navbord:rgb(120,120,120);
+	--c1:#fff;
+}
+*::selection{
+	color:#fff;
+	background:rgba(0,0,0,.3);
+}
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    z-index:1;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background:transparent; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(102, 102, 102,.8); 
+	border-radius:4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(51, 51, 51,.8);
+}
+.cont{
+	position:fixed;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background-image:url(https://marketplace.canva.com/EAFPnufdS8c/1/0/900w/canva-cute-leaf-green-print-iphone-wallpaper-oF2LIGnZJzQ.jpg);
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-position:center top;
+}
+#navbar{
+	background:var(--navback);
+	backdrop-filter:blur(15px);
+	box-shadow: 1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 0px var(--navbord), inset 1px 1px 1px var(--navbord);
+	position:fixed;
+	left:10px;
+	top:10px;
+	height:40px;
+	width:200px;
+	border-radius:20px;	
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	animation-name:;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-count:linear;
+}
+@keyframes shrink{
+	0%{
+		width:calc(100% - 70px);
+	}
+	60%{
+		width:190px;
+		padding-left:5px;
+		left:5px;
+	}
+	100%{
+		width:200px;
+	}
+}
+#navbar img{
+	height:30px;
+	float:left;
+	margin:6px 0 0 6px;
+}
+#navbar font{
+	float:left;
+	font-family:quicksand;
+	float:left;
+	line-height:40px;
+	font-size:22px;
+	font-weight:500;
+	margin:0px 0px 0 5px;
+	cursor:context-menu;
+	color:var(--c1);
+}
+#rht-src-ic{
+	height:40px;
+	width:40px;
+	position:fixed;
+	top:10px;
+	right:10px;
+	background:var(--navback);
+	backdrop-filter:blur(15px);
+	box-shadow: 1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 0px var(--navbord), inset 1px 1px 1px var(--navbord);
+	border-radius:20px;	
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	transition:0.3s;
+	text-align:center;
+}
+#rht-src-ic:hover{	
+	box-shadow: 2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 0px var(--navbord), inset 1px 1px 1px var(--navbord);
+}
+#rht-src-ic i{
+	font-size:23px;
+	line-height:40px;
+	color:var(--c1);
+}
+#srhbar{
+	display:none;
+	background:var(--navback);
+	backdrop-filter:blur(15px);
+	box-shadow: 1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 0px var(--navbord), inset 1px 1px 1px var(--navbord);
+	position:fixed;
+	left:10px;
+	top:10px;
+	height:40px;
+	width:calc(100% - 70px);
+	border-radius:20px;	
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	animation-name:expand;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-count:linear;
+}
+@keyframes expand{
+	0%{
+		width:200px;
+	}
+	60%{
+		width:calc(100% - 65px);
+		left:15px;
+	}
+	100%{
+		width:calc(100% - 70px);
+	}
+}
+</style>
+</html>
