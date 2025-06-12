@@ -97,40 +97,58 @@ document.onkeydown = (e) => {
 	</div>
 	
 	<div id="rht-src-ic" onclick="opsrh()">
-		<i class="material-symbols-outlined">search</i>
+		<i class="material-symbols-outlined" id="srch-ic">search</i>
 		<script>
 			function opsrh(){
 				if(document.getElementById("navbar").style.display === "none"){
 					document.getElementById("srhbar").style.display = "none";
 					document.getElementById("navbar").style.animationName = "shrink";
 					document.getElementById("navbar").style.display = "block";
+					document.getElementById("srch-ic").innerHTML = "search";
 				}
 				else{
 					document.getElementById("navbar").style.display = "none";
 					document.getElementById("srhbar").style.display = "block";
+					document.getElementById("srch-ic").innerHTML = "close";
+					document.getElementById("srh-in").focus();
 				}
 				
 			}
 		</script>
 	</div>
 	
-	<div id="srhbar"></div>
+	<div id="srhbar">
+		<input id="srh-in" type="text" placeholder="Search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false">
+	</div>
+
+	<div class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic" class="material-symbols-outlined">menu</i></div>
+	<div class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic" class="material-symbols-outlined">add</i></div>
+	
 </div>
 </body>
 <style>
 :root{
 	--navback:rgba(255,255,255,.4);
-	--navbord:rgb(225,225,225);
+	--navbord:rgba(225,225,225,.6);
 	--c1:#000;
+	--navshad:1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
+	--navshad2:2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
+	--navblur:blur(15px);
 }
 .dark{
 	--navback:rgba(0,0,0,.7);
-	--navbord:rgb(120,120,120);
+	--navbord:rgb(50,50,50);
 	--c1:#fff;
+	--navshad:1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
+	--navshad2:2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
+	--navblur:blur(25px);
 }
 *::selection{
 	color:#fff;
 	background:rgba(0,0,0,.3);
+}
+.material-symbols-outlined{
+	font-variation-settings:'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -160,15 +178,15 @@ document.onkeydown = (e) => {
 	left:0;
 	height:100%;
 	width:100%;
-	background-image:url(https://marketplace.canva.com/EAFPnufdS8c/1/0/900w/canva-cute-leaf-green-print-iphone-wallpaper-oF2LIGnZJzQ.jpg);
+	background-image:url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3BmLTE0LWx1a2VzdGFja3Bvb2xlOS1jb29sLXJvYWQtZi1qb2I1ODAuanBn.jpg);
 	background-size:cover;
 	background-repeat:no-repeat;
 	background-position:center top;
 }
 #navbar{
 	background:var(--navback);
-	backdrop-filter:blur(15px);
-	box-shadow: 1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 0px var(--navbord), inset 1px 1px 1px var(--navbord);
+	backdrop-filter:var(--navblur);
+	box-shadow: var(--navshad);
 	position:fixed;
 	left:10px;
 	top:10px;
@@ -219,8 +237,8 @@ document.onkeydown = (e) => {
 	top:10px;
 	right:10px;
 	background:var(--navback);
-	backdrop-filter:blur(15px);
-	box-shadow: 1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 0px var(--navbord), inset 1px 1px 1px var(--navbord);
+	backdrop-filter:var(--navblur);
+	box-shadow: var(--navshad);
 	border-radius:20px;	
 	-webkit-user-select:none;
 	-ms-user-select:none;
@@ -229,7 +247,7 @@ document.onkeydown = (e) => {
 	text-align:center;
 }
 #rht-src-ic:hover{	
-	box-shadow: 2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 0px var(--navbord), inset 1px 1px 1px var(--navbord);
+	box-shadow:var(--navshad2);
 }
 #rht-src-ic i{
 	font-size:23px;
@@ -239,8 +257,8 @@ document.onkeydown = (e) => {
 #srhbar{
 	display:none;
 	background:var(--navback);
-	backdrop-filter:blur(15px);
-	box-shadow: 1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 0px var(--navbord), inset 1px 1px 1px var(--navbord);
+	backdrop-filter:var(--navblur);
+	box-shadow: var(--navshad);
 	position:fixed;
 	left:10px;
 	top:10px;
@@ -255,6 +273,19 @@ document.onkeydown = (e) => {
 	animation-iteration-count:1;
 	animation-timming-count:linear;
 }
+#srh-in{
+	height:38px;
+	width:calc(100% - 5px);
+	border-radius:20px;
+	border:none;
+	outline:none;
+	text-indent:13px;
+	color:var(--c1);
+	font-family:quicksand;
+	font-size:15px;
+	font-weight:500;
+	background:transparent;
+}
 @keyframes expand{
 	0%{
 		width:200px;
@@ -266,6 +297,31 @@ document.onkeydown = (e) => {
 	100%{
 		width:calc(100% - 70px);
 	}
+}
+.bot-rt-bt{
+	position:fixed;
+	bottom:10px;
+	height:40px;
+	width:40px;
+	background:var(--navback);
+	backdrop-filter:var(--navblur);
+	box-shadow: var(--navshad);
+	border-radius:20px;	
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	transition:0.3s;
+	text-align:center;
+}
+.bot-rt-bt:hover{	
+	box-shadow:var(--navshad2);
+}
+#bt-bot-rt-1{right:10px;}
+#bt-bot-rt-2{right:60px;}
+#bt-rt-ic{
+	font-size:23px;
+	line-height:40px;
+	color:var(--c1);
 }
 </style>
 </html>
