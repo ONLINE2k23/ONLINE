@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>ONLINE Notes</title>
+<title>ONLINE Notes Beta</title>
 <link rel="icon" href="https://ONLINE2k23.github.io/ONLINE/onno2.png">
 <link rel="stylesheet" href="nonnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,33 @@ function main() {
 	themeload();
 	//document.getElementById("keyhista").innerHTML = localStorage.getItem("onnokeyhis2");
 	//document.getElementById("commitmain").innerHTML = localStorage.getItem("onnocomm2");
-	//splitKN();
+	splitKN();
+}
+function splitKN(){
+	var allkeys = localStorage.getItem("onnokeyhis2");
+	var indkey1 = allkeys.split(",");
+	var len = indkey1.length - 1;
+	var newkey;
+	document.getElementById("notebcont").innerHTML = '<div style="width:100%; height:60px; float:left;"></div>';
+
+		for(i = 0; i < len; i++){
+			var newkey = indkey1[i].replace(" ", "");
+			var date = localStorage.getItem(newkey); // Added 'var' for better scope
+			//var date2 = date.split("#date#"); // 'date2' will be an array: [content, actualDate]
+
+			// Assuming 'dae' placeholder in your HTML is for the date itself.
+            // date2[0] would be the note content, date2[1] would be the date string.
+            // I'm assuming you want to put the content of the note into 'func' or 'tie'
+            // and the actual date into 'dae'.
+            // If not, you might need another placeholder for content.
+			nwhtml = document.getElementById("notebsrc").innerHTML.replace(new RegExp("func", "g"), newkey);
+			nwhtml2 = nwhtml.replace(new RegExp("tie", "g"), newkey);
+			nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date); // Corrected: Use date2[1] for the date part
+
+			document.getElementById("notebcont").innerHTML += nwhtml3;
+		}
+
+	document.getElementById("notebcont").innerHTML += '<div style="width:100%; height:60px; float:left;"></div>';
 }
 function themeload() {
 	var mode = localStorage.getItem("onlnotheme");
@@ -33,7 +59,7 @@ function themeload() {
 	else{}
 }
 function right() {
-		window.event.preventDefault();
+		//window.event.preventDefault();
 }
 document.onkeydown = (e) => {
 	const cmdbox = document.getElementById("cmdbox");
@@ -124,6 +150,28 @@ document.onkeydown = (e) => {
 	<div class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic" class="material-symbols-outlined">menu</i></div>
 	<div class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic" class="material-symbols-outlined">add</i></div>
 	
+	
+	<!--<div id="notesblock" onclick="opennote('')">
+		<div id="noteview"> 20-11-2008 6.12.2024 23.12.2024 12.03.2025 13.03.2025  https://wallpapercave.com/wp/wp2474213.jpg  https://wallpapercave.com/w200/wp2726595.jpg</div>
+		<div id="noteinfo">
+			<div id="notebtitle">My Note</div>
+			<div id="notebdate">19.06.2025</div>
+		</div>
+	</div>-->
+	
+	<div id="notebsrc" style="display:none;">
+		<div id="notesblock" onclick="openNote('func')">
+			<div id="notebtitle">tie</div>
+			<div id="notebdate">dae</div>
+		</div>
+	</div>
+	
+	<div id="notebcont">
+		<div style="width:100%; height:60px; float:left;"></div>
+	
+		
+	</div>
+	
 </div>
 </body>
 <style>
@@ -134,6 +182,8 @@ document.onkeydown = (e) => {
 	--navshad:1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
 	--navshad2:2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
 	--navblur:blur(15px);
+	--noteback:rgba(255,255,255,.4);
+	--ntaft:#666;
 }
 .dark{
 	--navback:rgba(0,0,0,.7);
@@ -142,6 +192,8 @@ document.onkeydown = (e) => {
 	--navshad:1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
 	--navshad2:2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
 	--navblur:blur(25px);
+	--noteback:rgba(0,0,0,.9);
+	--ntaft:#666;
 }
 *::selection{
 	color:#fff;
@@ -200,6 +252,7 @@ document.onkeydown = (e) => {
 	animation-duration:0.5s;
 	animation-iteration-count:1;
 	animation-timming-count:linear;
+	z-index:10;
 }
 @keyframes shrink{
 	0%{
@@ -245,6 +298,7 @@ document.onkeydown = (e) => {
 	user-select:none;
 	transition:0.3s;
 	text-align:center;
+	z-index:10;
 }
 #rht-src-ic:hover{	
 	box-shadow:var(--navshad2);
@@ -272,6 +326,7 @@ document.onkeydown = (e) => {
 	animation-duration:0.5s;
 	animation-iteration-count:1;
 	animation-timming-count:linear;
+	z-index:10;
 }
 #srh-in{
 	height:38px;
@@ -312,6 +367,7 @@ document.onkeydown = (e) => {
 	user-select:none;
 	transition:0.3s;
 	text-align:center;
+	z-index:10;
 }
 .bot-rt-bt:hover{	
 	box-shadow:var(--navshad2);
@@ -322,6 +378,60 @@ document.onkeydown = (e) => {
 	font-size:23px;
 	line-height:40px;
 	color:var(--c1);
+}
+#notebcont{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	overflow:auto;
+}
+
+/*1*/
+#notesblock{
+	width:calc(100% - 40px);
+	height:50px;
+	background:var(--noteback);
+	backdrop-filter:var(--navblur);
+	box-shadow: var(--navshad);
+	color:var(--c1);
+	font-family:quicksand;
+	float:left;
+	margin:15px 0 0 20px;
+	border-radius:10px;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+#notebtitle{
+	width:calc(100% - 81px);
+	float:left;
+	height:50px;
+	line-height:50px;
+	text-indent:15px;
+	font-size:16px;
+	font-weight:bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#notebdate{
+	width:65px;
+	height:50px;
+	float:right;
+	color:#666;
+	font-size:12px;
+	font-weight:530;
+	line-height:50px;
+}
+#notebdate::before{
+	content:'';
+	height:30px;
+	width:1px;
+	background:var(--ntaft);
+	float:left;
+	margin:10px 0px 0 -8px;
 }
 </style>
 </html>
