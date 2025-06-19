@@ -33,11 +33,16 @@ function splitKN(){
 		for(i = 0; i < len; i++){
 			newkey = indkey1[i].replace(" ", "");
 			var date = localStorage.getItem("onno" + newkey);
-			var date2 = date.split("#date#");
+			if(date.includes("#date#")){
+				date2 = date.split("#date#")[0];
+			}
+			else{
+				date2 = "N/A";
+			}
 			
 			nwhtml = document.getElementById("notebsrc").innerHTML.replace(new RegExp("func", "g"), newkey);
 			nwhtml2 = nwhtml.replace(new RegExp("tie", "g"), newkey);
-			nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date2[0]); // Corrected: Use date2[1] for the date part
+			nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date2); // Corrected: Use date2[1] for the date part
 
 			document.getElementById("notebcont").innerHTML += nwhtml3;
 		}
