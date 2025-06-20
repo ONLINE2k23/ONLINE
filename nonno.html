@@ -31,9 +31,11 @@ function splitKN(){
 	document.getElementById("notebcont").innerHTML = '<div style="width:100%; height:60px; float:left;"></div>';
 
 		for(i = 0; i < len; i++){
-			newkey = indkey1[i].replace(" ", "");
+			newkey2 = indkey1[i].replace(" ", "");
+			newkey = newkey2.replace("$", "");
 			var date = localStorage.getItem("onno" + newkey);
-			if(date.includes("#date#")){
+			
+			if(date.includes("#date#") && date.split("#date#")[0].length < 11){
 				date2 = date.split("#date#")[0];
 			}
 			else{
@@ -42,9 +44,15 @@ function splitKN(){
 			
 			nwhtml = document.getElementById("notebsrc").innerHTML.replace(new RegExp("func", "g"), newkey);
 			nwhtml2 = nwhtml.replace(new RegExp("tie", "g"), newkey);
-			nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date2); // Corrected: Use date2[1] for the date part
+			nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date2); 
+			if(newkey2.includes("$")){
+				nwhtml4 = nwhtml3.replace(new RegExp("cont", "g"), "");
+			}
+			else{
+				nwhtml4 = nwhtml3.replace(new RegExp("cont", "g"), date.split("#date#")[1]); 
+			}
 
-			document.getElementById("notebcont").innerHTML += nwhtml3;
+			document.getElementById("notebcont").innerHTML += nwhtml4;
 		}
 
 	document.getElementById("notebcont").innerHTML += '<div style="width:100%; height:60px; float:left;"></div>';
@@ -131,6 +139,8 @@ document.onkeydown = (e) => {
 					document.getElementById("navbar").style.animationName = "shrink";
 					document.getElementById("navbar").style.display = "block";
 					document.getElementById("srch-ic").innerHTML = "search";
+					document.getElementById("srh-in").value = "";
+					searchnotes();
 				}
 				else{
 					document.getElementById("navbar").style.display = "none";
@@ -176,6 +186,7 @@ document.onkeydown = (e) => {
 	
 	<div id="notebsrc" style="display:none;">
 		<div id="notesblock" class="notesblock" style="display:block;" onclick="openNote('func')">
+			<div id="notetxtbar">cont</div>
 			<font style="display:none;">tie</font>
 			<div id="notebtitle">tie</div>
 			<div id="notebdate">dae</div>
@@ -191,7 +202,7 @@ document.onkeydown = (e) => {
 </div>
 </body>
 <style>
-:root{
+	:root{
 	--navback:rgba(255,255,255,.4);
 	--navbord:rgba(225,225,225,.6);
 	--c1:#000;
@@ -199,6 +210,7 @@ document.onkeydown = (e) => {
 	--navshad2:2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
 	--navblur:blur(15px);
 	--noteback:rgba(255,255,255,.4);
+	--noteback2:rgba(255,255,255,.4);
 	--ntaft:#666;
 }
 .dark{
@@ -209,6 +221,7 @@ document.onkeydown = (e) => {
 	--navshad2:2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
 	--navblur:blur(25px);
 	--noteback:rgba(0,0,0,.7);
+	--noteback2:rgba(0,0,0,.5);
 	--ntaft:#666;
 }
 *::selection{
@@ -220,8 +233,8 @@ document.onkeydown = (e) => {
 }
 /* width */
 ::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 0px;
+    height: 0px;
     z-index:1;
 }
 
@@ -406,8 +419,8 @@ document.onkeydown = (e) => {
 
 /*1*/
 #notesblock{
-	width:calc(100% - 40px);
-	height:50px;
+	width:calc(33% - 23px);
+	height:150px;
 	background:var(--noteback);
 	backdrop-filter:var(--navblur);
 	box-shadow: var(--navshad);
@@ -420,17 +433,28 @@ document.onkeydown = (e) => {
 	-ms-user-select:none;
 	user-select:none;
 }
+#notetxtbar{
+	height:64px;
+	width:calc(100% - 20px);
+	padding:10px 10px 20px 10px;
+	overflow:hidden;
+	background:var(--noteback2);
+	border-radius:10px;
+	color:var(--c1);
+	font-size:16px;	
+}
 #notebtitle{
 	width:calc(100% - 81px);
 	float:left;
 	height:50px;
 	line-height:50px;
 	text-indent:15px;
-	font-size:16px;
+	font-size:18px;
 	font-weight:bold;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	margin-top:2px;
 }
 #notebdate{
 	width:65px;
@@ -440,6 +464,7 @@ document.onkeydown = (e) => {
 	font-size:12px;
 	font-weight:530;
 	line-height:50px;
+	margin-top:2px;
 }
 #notebdate::before{
 	content:'';
@@ -448,6 +473,28 @@ document.onkeydown = (e) => {
 	background:var(--ntaft);
 	float:left;
 	margin:10px 0px 0 -8px;
+}
+@media only screen and (max-width:1000px){
+	#notesblock{
+		width:calc(50% - 30px);
+	}
+	#notebtitle{
+		
+	}
+	#notebdate{
+		
+	}
+}
+@media only screen and (max-width:700px){
+	#notesblock{
+		width:calc(100% - 40px);
+	}
+	#notebtitle{
+		
+	}
+	#notebdate{
+		
+	}
 }
 </style>
 </html>
