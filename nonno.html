@@ -139,6 +139,7 @@ document.onkeydown = (e) => {
 					document.getElementById("navbar").style.animationName = "shrink";
 					document.getElementById("navbar").style.display = "block";
 					document.getElementById("srch-ic").innerHTML = "search";
+					document.getElementById("rht-src-ic").style.animationName = "scale-vl";
 					document.getElementById("srh-in").value = "";
 					searchnotes();
 				}
@@ -146,6 +147,7 @@ document.onkeydown = (e) => {
 					document.getElementById("navbar").style.display = "none";
 					document.getElementById("srhbar").style.display = "block";
 					document.getElementById("srch-ic").innerHTML = "close";
+					document.getElementById("rht-src-ic").style.animationName = "scale-vl2";
 					document.getElementById("srh-in").focus();
 				}
 				
@@ -291,6 +293,10 @@ document.onkeydown = (e) => {
 		width:190px;
 		padding-left:5px;
 		left:5px;
+		height:43px;
+		padding-top:3px;
+		top:7px;
+		border-radius:23px;
 	}
 	100%{
 		width:200px;
@@ -328,9 +334,24 @@ document.onkeydown = (e) => {
 	transition:0.3s;
 	text-align:center;
 	z-index:10;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-count:linear;
 }
 #rht-src-ic:hover{	
 	box-shadow:var(--navshad2);
+}
+@keyframes scale-vl{
+	0%{transform:scale(1);}
+	10%{transform:scale(1.25);}
+	50%{transform:scale(0.8);}
+	100%{transform:scale(1);}
+}
+@keyframes scale-vl2{
+	0%{transform:scale(1);}
+	10%{transform:scale(1.25);}
+	50%{transform:scale(0.8);}
+	100%{transform:scale(1);}
 }
 #rht-src-ic i{
 	font-size:23px;
@@ -345,7 +366,8 @@ document.onkeydown = (e) => {
 	position:fixed;
 	left:10px;
 	top:10px;
-	height:40px;
+	height:37px;
+	padding-top:3px;
 	width:calc(100% - 70px);
 	border-radius:20px;	
 	-webkit-user-select:none;
@@ -358,7 +380,7 @@ document.onkeydown = (e) => {
 	z-index:10;
 }
 #srh-in{
-	height:38px;
+	height:32px;
 	width:calc(100% - 5px);
 	border-radius:20px;
 	border:none;
@@ -377,6 +399,10 @@ document.onkeydown = (e) => {
 	60%{
 		width:calc(100% - 65px);
 		left:15px;
+		height:34px;
+		padding-top:3px;
+		top:11px;
+		border-radius:17px;
 	}
 	100%{
 		width:calc(100% - 70px);
@@ -497,4 +523,4 @@ document.onkeydown = (e) => {
 	}
 }
 </style>
-</html>
+</html>	
