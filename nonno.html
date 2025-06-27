@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>ONLINE Notes Beta</title>
+<title>ONLINE Notes</title>
 <link rel="icon" href="https://ONLINE2k23.github.io/ONLINE/onno2.png">
 <link rel="stylesheet" href="nonnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,7 @@ function main() {
 	//document.getElementById("keyhista").innerHTML = localStorage.getItem("onnokeyhis2");
 	//document.getElementById("commitmain").innerHTML = localStorage.getItem("onnocomm2");
 	splitKN();
+	countNotes();
 }
 function splitKN(){
 	var allkeys = localStorage.getItem("onnokeyhis2");
@@ -45,7 +46,7 @@ function splitKN(){
 			nwhtml = document.getElementById("notebsrc").innerHTML.replace(new RegExp("func", "g"), newkey);
 			nwhtml2 = nwhtml.replace(new RegExp("tie", "g"), newkey);
 			nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date2); 
-			if(newkey2.includes("$")){
+			if(newkey2.charAt(0) === "$"){
 				nwhtml4 = nwhtml3.replace(new RegExp("cont", "g"), "");
 			}
 			else{
@@ -57,34 +58,36 @@ function splitKN(){
 	splitKN2();
 }
 function splitKN2(){
-
+	var allkeys2 = localStorage.getItem("onnokeyhis2");
 	for(i = 1; i < 4; i++){
 			newkey = "Note " + i;
 			var date = localStorage.getItem("onno" + newkey);
-			if(date){
-				if(date.includes("#date#") && date.split("#date#")[1].length < 11){
-					date2 = date.split("#date#")[1];
-				}
-				else{
-					date2 = "N/A";
-				}
-				
-				nwhtml = document.getElementById("notebsrc").innerHTML.replace(new RegExp("func", "g"), newkey);
-				nwhtml2 = nwhtml.replace(new RegExp("tie", "g"), newkey);
-				nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date2); 
-				if(newkey2.includes("$")){
-					nwhtml4 = nwhtml3.replace(new RegExp("cont", "g"), "");
-				}
-				else{
+			if(allkeys2.includes(newkey)){}
+			else{
+				if(date){
+					if(date.includes("#date#") && date.split("#date#")[1].length < 11){
+						date2 = date.split("#date#")[1];
+					}
+					else{
+						date2 = "N/A";
+					}
+					
+					nwhtml = document.getElementById("notebsrc").innerHTML.replace(new RegExp("func", "g"), newkey);
+					nwhtml2 = nwhtml.replace(new RegExp("tie", "g"), newkey);
+					nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date2);
 					nwhtml4 = nwhtml3.replace(new RegExp("cont", "g"), date.split("#date#")[0]); 
+					document.getElementById("notebcont").innerHTML += nwhtml4;
 				}
-	
-				document.getElementById("notebcont").innerHTML += nwhtml4;
+				else{}
 			}
-			else{}
 		}
 		
 	document.getElementById("notebcont").innerHTML += '<div style="width:100%; height:60px; float:left;"></div>';
+}
+function countNotes(){
+	var mainc = document.getElementById("notebcont");
+	var block = mainc.getElementsByClassName("notesblock");
+	document.getElementById("srh-in").placeholder = "Search in " + block.length + " Notes...";
 }
 function themeload() {
 	var mode = localStorage.getItem("onlnotheme");
@@ -186,9 +189,10 @@ document.onkeydown = (e) => {
 				var mainc = document.getElementById("notebcont");
 				var block = mainc.getElementsByClassName("notesblock");
 				for(let i = 0; i < block.length; i++){
-					var a = block[i].getElementsByTagName("font")[0];
+					var a = block[i].textContent;
+					//var b = block[i].getElementsByClassName("notetxt")[0];
 					
-					if(a.textContent.toLowerCase().indexOf(inp.value.toLowerCase()) > -1) {
+					if(a.toLowerCase().indexOf(inp.value.toLowerCase()) > -1) {
 						block[i].style.display = "block";	
 					}
 					else{
@@ -203,8 +207,9 @@ document.onkeydown = (e) => {
 		<input id="srh-in" type="text" placeholder="Search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" onkeyup="searchnotes()">
 	</div>
 
-	<div class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic" class="material-symbols-outlined">menu</i></div>
-	<div class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic" class="material-symbols-outlined">add</i></div>
+	<div title="Settings" class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic" class="material-symbols-outlined">menu</i></div>
+	<div title="Favourites" class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic" class="material-symbols-outlined">star</i></div>
+	<div title="Create New Note" class="bot-rt-bt" id="bt-bot-rt-3"><i id="bt-rt-ic" class="material-symbols-outlined">add</i></div>
 	
 	
 	<!--<div id="notesblock" onclick="opennote('')">
@@ -217,7 +222,7 @@ document.onkeydown = (e) => {
 	
 	<div id="notebsrc" style="display:none;">
 		<div id="notesblock" class="notesblock" style="display:block;" onclick="openNote('func')">
-			<div id="notetxtbar">cont</div>
+			<div id="notetxtbar" class="notetxt">cont</div>
 			<font style="display:none;">tie</font>
 			<div id="notebtitle">tie</div>
 			<div id="notebdate">dae</div>
@@ -238,7 +243,7 @@ document.onkeydown = (e) => {
 	--navbord:rgba(225,225,225,.6);
 	--c1:#000;
 	--navshad:1px 1px 3px rgba(0,0,0,.6), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
-	--navshad2:2px 2px 5px rgba(0,0,0,.8), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
+	--navshad2:2px 2px 5px rgba(0,0,0,.5), inset 1px 1px 3px var(--navbord), inset 1px 1px 1px var(--navbord);
 	--navblur:blur(15px);
 	--noteback:rgba(255,255,255,.4);
 	--noteback2:rgba(255,255,255,.4);
@@ -372,14 +377,14 @@ document.onkeydown = (e) => {
 }
 @keyframes scale-vl{
 	0%{transform:scale(1);}
-	10%{transform:scale(1.25);}
-	50%{transform:scale(0.8);}
+	10%{transform:scale(1.15);}
+	50%{transform:scale(0.9);}
 	100%{transform:scale(1);}
 }
 @keyframes scale-vl2{
 	0%{transform:scale(1);}
-	10%{transform:scale(1.25);}
-	50%{transform:scale(0.8);}
+	10%{transform:scale(1.15);}
+	50%{transform:scale(0.9);}
 	100%{transform:scale(1);}
 }
 #rht-src-ic i{
@@ -458,6 +463,7 @@ document.onkeydown = (e) => {
 }
 #bt-bot-rt-1{right:10px;}
 #bt-bot-rt-2{right:60px;}
+#bt-bot-rt-3{right:110px;}
 #bt-rt-ic{
 	font-size:23px;
 	line-height:40px;
@@ -487,6 +493,10 @@ document.onkeydown = (e) => {
 	-webkit-user-select:none;
 	-ms-user-select:none;
 	user-select:none;
+	transition:0.1s;
+}
+#notesblock:hover{
+	box-shadow:var(--navshad2);
 }
 #notetxtbar{
 	height:64px;
