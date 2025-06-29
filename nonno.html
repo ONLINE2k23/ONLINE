@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>ONLINE Notes</title>
+<title>ONLINE Notes Beta</title>
 <link rel="icon" href="https://ONLINE2k23.github.io/ONLINE/onno2.png">
 <link rel="stylesheet" href="nonnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +23,7 @@ function main() {
 	//document.getElementById("commitmain").innerHTML = localStorage.getItem("onnocomm2");
 	splitKN();
 	countNotes();
+	sessionStorage.setItem("favfilt", "off");
 }
 function splitKN(){
 	var allkeys = localStorage.getItem("onnokeyhis2");
@@ -33,7 +34,9 @@ function splitKN(){
 
 		for(i = 0; i < len; i++){
 			newkey2 = indkey1[i].replace(" ", "");
-			newkey = newkey2.replace("$", "");
+			newkey3 = newkey2.replace("$", "");
+			newkey4 = newkey3.replace("*", "");
+			newkey = newkey4.replace("#", "");
 			var date = localStorage.getItem("onno" + newkey);
 			
 			if(date.includes("#date#") && date.split("#date#")[1].length < 11){
@@ -48,6 +51,14 @@ function splitKN(){
 			nwhtml3 = nwhtml2.replace(new RegExp("dae", "g"), date2); 
 			if(newkey2.charAt(0) === "$"){
 				nwhtml4 = nwhtml3.replace(new RegExp("cont", "g"), "");
+			}
+			else if(newkey2.charAt(0) === "*"){
+				nwhtml5 = nwhtml3.replace(new RegExp("cont", "g"), date.split("#date#")[0]);
+				nwhtml4 = nwhtml5.replace(new RegExp('<i class="material-symbols-outlined" id="note-fav-star" style="display:none">star</i>', "g"), '<i class="material-symbols-outlined" id="note-fav-star" style="display:block">star</i>');
+			}
+			else if(newkey2.charAt(0) === "#"){
+				nwhtml5 = nwhtml3.replace(new RegExp("cont", "g"), "");
+				nwhtml4 = nwhtml5.replace(new RegExp('<i class="material-symbols-outlined" id="note-fav-star" style="display:none">star</i>', "g"), '<i class="material-symbols-outlined" id="note-fav-star" style="display:block">star</i>');
 			}
 			else{
 				nwhtml4 = nwhtml3.replace(new RegExp("cont", "g"), date.split("#date#")[0]); 
@@ -159,7 +170,7 @@ document.onkeydown = (e) => {
 </script>
 <div class="cont" id="cont" oncontextmenu="right()">
 	<div id="navbar">
-		<img src="https://ONLINE2k23.github.io/ONLINE/onno2.png"><font>ONLINE Notes</font>
+		<img src="https://ONLINE2k23.github.io/ONLINE/onno2.png"><font id="mainhead">ONLINE Notes</font>
 	</div>
 	
 	<div id="rht-src-ic" onclick="opsrh()">
@@ -182,6 +193,12 @@ document.onkeydown = (e) => {
 					document.getElementById("rht-src-ic").style.animationName = "scale-vl2";
 					document.getElementById("srh-in").focus();
 				}
+				var a;// its declared to seperate two if statements
+				
+				if(sessionStorage.getItem("favfilt") === "on"){
+					arrangeStar();
+				}
+				else{}
 				
 			}
 			function searchnotes() {
@@ -190,7 +207,6 @@ document.onkeydown = (e) => {
 				var block = mainc.getElementsByClassName("notesblock");
 				for(let i = 0; i < block.length; i++){
 					var a = block[i].textContent;
-					//var b = block[i].getElementsByClassName("notetxt")[0];
 					
 					if(a.toLowerCase().indexOf(inp.value.toLowerCase()) > -1) {
 						block[i].style.display = "block";	
@@ -200,6 +216,39 @@ document.onkeydown = (e) => {
 					}
 				}
 			}
+			function arrangeStar(){
+				var mainc = document.getElementById("notebcont");
+				var block = mainc.getElementsByClassName("notesblock");
+				var b = '<i class="material-symbols-outlined" id="note-fav-star" style="display:block">star</i>';
+				if(sessionStorage.getItem("favfilt") === "on"){					
+					for (let i = 0; i < block.length; i++){
+						block[i].style.display = "block";	
+					}
+					document.getElementById("botbanner").style.display = "none";
+					document.getElementById("bt-rt-ic2").style.color = "var(--c1)";
+					document.getElementById("bt-bot-rt-2").style.animationName = "scale-vl2";
+					document.getElementById("bt-rt-ic2").style.fontVariationSettings = "'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24";
+					sessionStorage.setItem("favfilt", "off");
+				}
+				else{
+					for (let i = 0; i < block.length; i++){
+						var a = block[i].innerHTML;
+						
+						if(a.toLowerCase().indexOf(b) > -1) {
+							block[i].style.display = "block";	
+						}
+						else{
+							block[i].style.display = "none";
+						}
+					}
+					document.getElementById("botbanner").style.display = "block";
+					document.getElementById("botbanner").textContent = "Showing Starred Notes";
+					document.getElementById("bt-rt-ic2").style.color = "#f60";
+					document.getElementById("bt-bot-rt-2").style.animationName = "scale-vl";
+					document.getElementById("bt-rt-ic2").style.fontVariationSettings = "'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24";
+					sessionStorage.setItem("favfilt", "on");
+				}
+			}
 		</script>
 	</div>
 	
@@ -207,9 +256,9 @@ document.onkeydown = (e) => {
 		<input id="srh-in" type="text" placeholder="Search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" onkeyup="searchnotes()">
 	</div>
 
-	<div title="Settings" class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic" class="material-symbols-outlined">menu</i></div>
-	<div title="Favourites" class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic" class="material-symbols-outlined">star</i></div>
-	<div title="Create New Note" class="bot-rt-bt" id="bt-bot-rt-3"><i id="bt-rt-ic" class="material-symbols-outlined">add</i></div>
+	<div title="Settings" class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic1" class="material-symbols-outlined">menu</i></div>
+	<div onclick="arrangeStar()" title="Starred" class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic2" class="material-symbols-outlined">star</i></div>
+	<div title="Create New Note" class="bot-rt-bt" id="bt-bot-rt-3"><i id="bt-rt-ic3" class="material-symbols-outlined">add</i></div>
 	
 	
 	<!--<div id="notesblock" onclick="opennote('')">
@@ -224,7 +273,7 @@ document.onkeydown = (e) => {
 		<div id="notesblock" class="notesblock" style="display:block;" onclick="openNote('func')">
 			<div id="notetxtbar" class="notetxt">cont</div>
 			<font style="display:none;">tie</font>
-			<div id="notebtitle">tie</div>
+			<div id="notebtitle"><i class="material-symbols-outlined" id="note-fav-star" style="display:none">star</i>tie</div>
 			<div id="notebdate">dae</div>
 		</div>
 	</div>
@@ -235,6 +284,7 @@ document.onkeydown = (e) => {
 		
 	</div>
 	
+	<div id="botbanner">Showing Starred Notes</div>
 </div>
 </body>
 <style>
@@ -457,6 +507,9 @@ document.onkeydown = (e) => {
 	transition:0.3s;
 	text-align:center;
 	z-index:10;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-count:linear;
 }
 .bot-rt-bt:hover{	
 	box-shadow:var(--navshad2);
@@ -464,7 +517,7 @@ document.onkeydown = (e) => {
 #bt-bot-rt-1{right:10px;}
 #bt-bot-rt-2{right:60px;}
 #bt-bot-rt-3{right:110px;}
-#bt-rt-ic{
+.bot-rt-bt i{
 	font-size:23px;
 	line-height:40px;
 	color:var(--c1);
@@ -538,6 +591,58 @@ document.onkeydown = (e) => {
 	background:var(--ntaft);
 	float:left;
 	margin:10px 0px 0 -8px;
+}
+#note-fav-star{
+	float:left;
+	line-height:48px;
+	font-size:25px;
+	width:27px;
+	color:#f60;
+	font-variation-settings:'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+}
+#botbanner{
+	display:none;
+	position:fixed;
+	bottom:10px;
+	left:10px;
+	/*box-shadow: 0 0 3px #000;
+	background:rgba(0,0,0,.75);*/
+	background:var(--noteback);
+	backdrop-filter:var(--navblur);
+	box-shadow: var(--navshad);
+	color:var(--c1);
+	line-height:40px;
+	padding:0 10px;
+	border-radius:5px;
+	font-family:quicksand;
+	font-size:12px;
+	cursor:context-menu;
+	max-width:calc(100% - 190px);
+	/*word-wrap: break-word;*/
+	animation-name:botnot;
+	animation-duration:0.3s;
+	animation-iteration-count:1;
+	animation-timming-count:linear;
+}
+@keyframes botnot{
+	0%{
+		bottom:-60px;
+		left:10px;
+		line-height:40px;
+		padding:0 10px;
+	}
+	60%{
+		bottom:25px;
+		left:5px;
+		line-height:30px;
+		padding:0 15px;
+	}
+	100%{
+		bottom:10px;
+		left:10px;
+		line-height:40px;
+		padding:0 10px;
+	}
 }
 @media only screen and (max-width:1000px){
 	#notesblock{
