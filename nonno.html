@@ -24,6 +24,7 @@ function main() {
 	splitKN();
 	countNotes();
 	sessionStorage.setItem("favfilt", "off");
+	//opSett();
 }
 function splitKN(){
 	var allkeys = localStorage.getItem("onnokeyhis2");
@@ -224,7 +225,8 @@ document.onkeydown = (e) => {
 					for (let i = 0; i < block.length; i++){
 						block[i].style.display = "block";	
 					}
-					document.getElementById("botbanner").style.display = "none";
+					//document.getElementById("botbanner").style.display = "none";
+					document.getElementById("botbanner").textContent = "This a Beta Version.";
 					document.getElementById("bt-rt-ic2").style.color = "var(--c1)";
 					document.getElementById("bt-bot-rt-2").style.animationName = "scale-vl2";
 					document.getElementById("bt-rt-ic2").style.fontVariationSettings = "'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24";
@@ -243,11 +245,34 @@ document.onkeydown = (e) => {
 					}
 					document.getElementById("botbanner").style.display = "block";
 					document.getElementById("botbanner").textContent = "Showing Starred Notes";
-					document.getElementById("bt-rt-ic2").style.color = "#f60";
+					document.getElementById("bt-rt-ic2").style.color = "#f90";
 					document.getElementById("bt-bot-rt-2").style.animationName = "scale-vl";
 					document.getElementById("bt-rt-ic2").style.fontVariationSettings = "'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24";
 					sessionStorage.setItem("favfilt", "on");
 				}
+			}
+			function opSett(){
+				document.getElementById("navbar").style.display = "none";
+				document.getElementById("rht-src-ic").style.display = "none";
+				document.getElementById("bt-bot-rt-1").style.display = "none";
+				document.getElementById("bt-bot-rt-2").style.display = "none";
+				document.getElementById("bt-bot-rt-3").style.display = "none";
+				document.getElementById("notebcont").style.display = "none";
+				document.getElementById("settings").style.display = "block";
+				
+				if(sessionStorage.getItem("favfilt") === "on"){
+					arrangeStar();
+				}
+				else{}
+			}
+			function clSett(){
+				document.getElementById("navbar").style.display = "block";
+				document.getElementById("rht-src-ic").style.display = "block";
+				document.getElementById("bt-bot-rt-1").style.display = "block";
+				document.getElementById("bt-bot-rt-2").style.display = "block";
+				document.getElementById("bt-bot-rt-3").style.display = "block";
+				document.getElementById("notebcont").style.display = "block";
+				document.getElementById("settings").style.display = "none";
 			}
 		</script>
 	</div>
@@ -256,7 +281,7 @@ document.onkeydown = (e) => {
 		<input id="srh-in" type="text" placeholder="Search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" onkeyup="searchnotes()">
 	</div>
 
-	<div title="Settings" class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic1" class="material-symbols-outlined">menu</i></div>
+	<div onclick="opSett()" title="Settings" class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic1" class="material-symbols-outlined">menu</i></div>
 	<div onclick="arrangeStar()" title="Starred" class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic2" class="material-symbols-outlined">star</i></div>
 	<div title="Create New Note" class="bot-rt-bt" id="bt-bot-rt-3"><i id="bt-rt-ic3" class="material-symbols-outlined">add</i></div>
 	
@@ -284,7 +309,15 @@ document.onkeydown = (e) => {
 		
 	</div>
 	
-	<div id="botbanner">Showing Starred Notes</div>
+	<div id="settings">
+		<button id="setback-bt" onclick="clSett()"><i class="material-symbols-outlined">arrow_back_ios_new</i></button>
+		<font id="sethead">Settings</font>
+		
+		<div id="setcont">
+		</div>
+	</div>
+	
+	<div id="botbanner">This is a Beta Version.</div>
 </div>
 </body>
 <style>
@@ -597,11 +630,11 @@ document.onkeydown = (e) => {
 	line-height:48px;
 	font-size:25px;
 	width:27px;
-	color:#f60;
+	color:#f90;
 	font-variation-settings:'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
 }
 #botbanner{
-	display:none;
+	/*display:none;*/
 	position:fixed;
 	bottom:10px;
 	left:10px;
@@ -613,7 +646,7 @@ document.onkeydown = (e) => {
 	color:var(--c1);
 	line-height:40px;
 	padding:0 10px;
-	border-radius:5px;
+	border-radius:10px;
 	font-family:quicksand;
 	font-size:12px;
 	cursor:context-menu;
@@ -623,6 +656,9 @@ document.onkeydown = (e) => {
 	animation-duration:0.3s;
 	animation-iteration-count:1;
 	animation-timming-count:linear;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
 }
 @keyframes botnot{
 	0%{
@@ -632,7 +668,7 @@ document.onkeydown = (e) => {
 		padding:0 10px;
 	}
 	60%{
-		bottom:25px;
+		bottom:30px;
 		left:5px;
 		line-height:30px;
 		padding:0 15px;
@@ -643,6 +679,76 @@ document.onkeydown = (e) => {
 		line-height:40px;
 		padding:0 10px;
 	}
+}
+#settings{
+	display:none;
+	height:calc(100% - 60px);
+	width:calc(100% - 60px);
+	background:var(--noteback);
+	backdrop-filter:var(--navblur);
+	box-shadow: var(--navshad);
+	color:var(--c1);
+	position:fixed;
+	top:30px;
+	left:30px;
+	border-radius:30px;
+	animation-name:settings;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-count:linear;
+}
+@keyframes settings{
+	0%{
+		left:calc(-100% + 50px);
+	}
+	60%{
+		left:90px;
+		top:25px;
+		width:calc(100% - 90px);
+		height:calc(100% - 50px);
+	}
+	100%{
+		left:30px;
+		top:30px;
+		width:calc(100% - 60px);
+		height:calc(100% - 60px);
+	}
+}
+#setback-bt{
+	height:40px;
+	width:40px;	
+	border-radius:50%;
+	margin:10px;
+	float:left;
+	transition:0.3s;
+	border:none;
+	outline:none;
+	background:transparent;
+}
+#setback-bt:active{
+	background:var(--noteback);
+}
+#setback-bt i{
+	float:left;
+	line-height:30px;
+	font-size:16px;
+	width:27px;
+	font-variation-settings:'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+}
+#sethead{
+	line-height:60px;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	font-family:quicksand;
+	font-size:20px;
+}
+#setcont{
+	/*border:1px solid#000;*/
+	height:calc(100% - 80px);
+	width:calc(100% - 20px);
+	margin:10px;
+	border-radius:20px;
 }
 @media only screen and (max-width:1000px){
 	#notesblock{
@@ -664,6 +770,33 @@ document.onkeydown = (e) => {
 	}
 	#notebdate{
 		
+	}
+}
+@media only screen and (max-width:450px){
+	#settings{
+		height:calc(100% - 40px);
+		width:calc(100% - 40px);
+		position:fixed;
+		top:20px;
+		left:20px;
+		animation-duration:0.5s;
+	}
+	@keyframes settings{
+		0%{
+			left:calc(-100% + 50px);
+		}
+		60%{
+			left:70px;
+			top:5px;
+			width:calc(100% - 70px);
+			height:calc(100% - 10px);
+		}
+		100%{
+			left:20px;
+			top:20px;
+			width:calc(100% - 40px);
+			height:calc(100% - 40px);
+		}
 	}
 }
 </style>
