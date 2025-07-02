@@ -3,7 +3,6 @@
 <head>
 <title>ONLINE Notes Beta</title>
 <link rel="icon" href="https://ONLINE2k23.github.io/ONLINE/onno2.png">
-<link rel="stylesheet" href="nonnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -105,13 +104,28 @@ function themeload() {
 	var mode = localStorage.getItem("onlnotheme");
 	
 	if(mode === "dark") {
-		//document.getElementById("themei").innerHTML = "dark_mode";
+		document.getElementById("themei").innerHTML = "light_mode";
+		document.getElementById("themefont").innerHTML = "Change to Light Theme";
 		document.body.classList.toggle("dark");
 	}
 	else{}
 }
 function right() {
 		//window.event.preventDefault();
+}
+function changetheme() {
+	document.body.classList.toggle("dark");
+	
+	if(document.body.classList.contains("dark")) {
+		document.getElementById("themei").innerHTML = "light_mode";
+		document.getElementById("themefont").innerHTML = "Change to Light Theme";
+		localStorage.setItem("onlnotheme", "dark");
+	}
+	else{
+		document.getElementById("themei").innerHTML = "dark_mode";
+		document.getElementById("themefont").innerHTML = "Change to Dark Theme";
+		localStorage.removeItem("onlnotheme");
+	}
 }
 document.onkeydown = (e) => {
 	const cmdbox = document.getElementById("cmdbox");
@@ -281,7 +295,7 @@ document.onkeydown = (e) => {
 		<input id="srh-in" type="text" placeholder="Search" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" onkeyup="searchnotes()">
 	</div>
 
-	<div onclick="opSett()" title="Settings" class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic1" class="material-symbols-outlined">menu</i></div>
+	<div onclick="opSett()" title="More Actions" class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic1" class="material-symbols-outlined">menu</i></div>
 	<div onclick="arrangeStar()" title="Starred" class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic2" class="material-symbols-outlined">star</i></div>
 	<div title="Create New Note" class="bot-rt-bt" id="bt-bot-rt-3"><i id="bt-rt-ic3" class="material-symbols-outlined">add</i></div>
 	
@@ -311,9 +325,13 @@ document.onkeydown = (e) => {
 	
 	<div id="settings">
 		<button id="setback-bt" onclick="clSett()"><i class="material-symbols-outlined">arrow_back_ios_new</i></button>
-		<font id="sethead">Settings</font>
+		<font id="sethead">More Actions</font>
 		
 		<div id="setcont">
+			<div id="setchild" onclick="changetheme()">
+				<i class="material-symbols-outlined" id="themei" style="color:#f39;">dark_mode</i>
+				<font id="themefont">Change to Dark Theme</font>
+			</div>
 		</div>
 	</div>
 	
@@ -627,9 +645,10 @@ document.onkeydown = (e) => {
 }
 #note-fav-star{
 	float:left;
+	margin-left:-7px;
 	line-height:48px;
 	font-size:25px;
-	width:27px;
+	width:30px;
 	color:#f90;
 	font-variation-settings:'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
 }
@@ -724,6 +743,7 @@ document.onkeydown = (e) => {
 	border:none;
 	outline:none;
 	background:transparent;
+	color:var(--c1);
 }
 #setback-bt:active{
 	background:var(--noteback);
@@ -749,6 +769,30 @@ document.onkeydown = (e) => {
 	width:calc(100% - 20px);
 	margin:10px;
 	border-radius:20px;
+}
+#setchild{
+	width:100%;
+	/*border-bottom:1px solid#666;*/
+	min-height:60px;
+	transition:0.3s;
+	color:var(--c1);
+	font-family:quicksand;
+	font-size:15px;
+	cursor:context-menu;
+	border-radius:20px;
+}
+#setchild:active{
+	background:var(--noteback);
+}
+#setchild font{
+	line-height:60px;
+	float:left;
+	margin-left:15px;
+}
+#setchild i{
+	line-height:60px;
+	float:left;
+	margin-left:15px;
 }
 @media only screen and (max-width:1000px){
 	#notesblock{
@@ -787,9 +831,9 @@ document.onkeydown = (e) => {
 		}
 		60%{
 			left:70px;
-			top:5px;
+			top:15px;
 			width:calc(100% - 70px);
-			height:calc(100% - 10px);
+			height:calc(100% - 30px);
 		}
 		100%{
 			left:20px;
