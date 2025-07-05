@@ -18,12 +18,36 @@
 <script>
 function main() {
 	themeload();
+	askSerialId();
 	//document.getElementById("keyhista").innerHTML = localStorage.getItem("onnokeyhis2");
 	//document.getElementById("commitmain").innerHTML = localStorage.getItem("onnocomm2");
-	splitKN();
-	countNotes();
-	sessionStorage.setItem("favfilt", "off");
 	//opSett();
+}
+function all(display, animation){
+	document.getElementById("navbar").style.display = display;
+	document.getElementById("rht-src-ic").style.display = display;
+	document.getElementById("bt-bot-rt-1").style.display = display;
+	document.getElementById("bt-bot-rt-2").style.display = display;
+	document.getElementById("bt-bot-rt-3").style.display = display;
+	document.getElementById("rht-src-ic").style.animationName = animation;
+	document.getElementById("navbar").style.animationName = animation;
+	document.getElementById("notebcont").style.display = display;
+	document.getElementById("srhbar").style.display = display;
+	document.getElementById("bt-bot-rt-1").style.animationName = animation;
+	document.getElementById("bt-bot-rt-2").style.animationName = animation;
+	document.getElementById("bt-bot-rt-3").style.animationName = animation;
+}
+function askSerialId(){
+	if(localStorage.getItem("newonnoserids")){
+		splitKN();
+		countNotes();
+		sessionStorage.setItem("favfilt", "off");
+	}
+	else{
+		document.getElementById("serialEntery").style.display = "block";
+		document.getElementById("sE1").focus();
+		all("none", "");
+	}
 }
 function splitKN(){
 	var allkeys = localStorage.getItem("onnokeyhis2");
@@ -128,11 +152,6 @@ function changetheme() {
 	}
 }
 document.onkeydown = (e) => {
-	const cmdbox = document.getElementById("cmdbox");
-	const svbox = document.getElementById("savenotebox");
-	const opbox = document.getElementById("keynotebox");
-	const crbox = document.getElementById("crtnotebox");
-	const renbox = document.getElementById("rennotebox");
 
     if (e.keyCode == 123) {
         e.preventDefault();
@@ -149,37 +168,13 @@ document.onkeydown = (e) => {
     if (e.ctrlKey && e.key == 'U') {
         e.preventDefault();
     }
-    if (e.ctrlKey && e.key == 's') {
-        e.preventDefault();		
-        document.getElementById("saveBt").click();
-    }
-    if (e.ctrlKey && e.key == 'o') {
-        e.preventDefault();		
-        document.getElementById("openBt").click();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == '%') {
-        document.getElementById("cmdbt3").click();
-		document.getElementById("commandinput").focus();
-    }
-	if(e.key === "Enter" && cmdbox.style.display === "block") {
+	if(e.key === "Enter" && document.getElementById("serialEntery").style.display === "block" && document.getElementById("sE1").value) {
 		event.preventDefault();
-		document.getElementById("cmdbt1").click();		
+		document.getElementById("sE2").focus();		
 	}
-	if(e.key === "Enter" && svbox.style.display === "block") {
+	if(e.key === "Enter" && document.getElementById("serialEntery").style.display === "block" && document.getElementById("sE1").value && document.getElementById("sE2").value) {
 		event.preventDefault();
-		savenote();
-	}
-	if(e.key === "Enter" && opbox.style.display === "block") {
-		event.preventDefault();
-		opnotebyKey();
-	}
-	if(e.key === "Enter" && crbox.style.display === "block") {
-		event.preventDefault();
-		createnote();
-	}
-	if(e.key === "Enter" && renbox.style.display === "block") {
-		event.preventDefault();
-		renameKey();
+		document.getElementById("sEbt").click();		
 	}
 };
 </script>
@@ -266,18 +261,13 @@ document.onkeydown = (e) => {
 				}
 			}
 			function opSett(){
-				document.getElementById("navbar").style.display = "none";
-				document.getElementById("rht-src-ic").style.display = "none";
-				document.getElementById("bt-bot-rt-1").style.display = "none";
-				document.getElementById("bt-bot-rt-2").style.display = "none";
-				document.getElementById("bt-bot-rt-3").style.display = "none";
-				document.getElementById("notebcont").style.display = "none";
-				document.getElementById("settings").style.display = "block";
-				
 				if(sessionStorage.getItem("favfilt") === "on"){
 					arrangeStar();
 				}
 				else{}
+				document.getElementById("srch-ic").innerHTML = "search";
+				all("none", "");
+				document.getElementById("settings").style.display = "block";
 			}
 			function clSett(){
 				document.getElementById("navbar").style.display = "block";
@@ -336,6 +326,29 @@ document.onkeydown = (e) => {
 	</div>
 	
 	<div id="botbanner">This is a Beta Version.</div>
+	
+	<div id="serialEntery">
+		<font id="sEF1">Create Serial IDs</font>
+		<input type="text" class="sEIn" id="sE1" placeholder="Create Serial ID 1" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+		<input type="text" class="sEIn" id="sE2" placeholder="Create Serial ID 2" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false"><br>
+		<font id="sEF2">You have to create 2 distinct custom Serial IDs, they are needed for data recovery and security. Please remember them and keep them private.</font><br>
+		<button onclick="sEOk()" id="sEbt">OK</button>
+		<script>
+			function sEOk(){
+				if(document.getElementById("sE1").value && document.getElementById("sE2").value){
+					localStorage.setItem("newonnoserids", document.getElementById("sE1").value + "<sepSerId>" +document.getElementById("sE2").value);
+					alert("Serial IDs Created Successfully! Please remember them for future use.");
+					window.location.reload();
+				}
+				else{
+					alert("Error, Either both inputs are not entered or the inputs are invalid");
+					document.getElementById("sE1").focus();
+				}
+			}
+		</script>
+	</div>
+	
+	
 </div>
 </body>
 <style>
@@ -793,6 +806,79 @@ document.onkeydown = (e) => {
 	line-height:60px;
 	float:left;
 	margin-left:15px;
+}
+#serialEntery{
+	display:none;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	z-index:20;
+	width:240px;	
+	background:var(--noteback);
+	backdrop-filter:var(--navblur);
+	box-shadow: var(--navshad);
+	border-radius:15px;
+	padding:4px 10px 10px 10px;
+	font-family:quicksand;
+	color:var(--c1);
+}
+#sEF1{
+	font-size:18px;
+	line-height:26px;
+	font-weight:500;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+#sEF2{
+	font-size:12px;
+	line-height:12px;
+	font-weight:500;
+	text-align:justify;
+	word-break: break-all;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.sEIn{
+	width:232px;
+	height:23px;
+	margin:7px 0 0 0;
+	border-radius:5px;
+	border:1px solid rgba(0,0,0,0);
+	outline:none;
+	background:var(--noteback);
+	font-family:quicksand;
+	font-size:13px;
+	font-weight:550;
+	text-indent:5px;
+	transition:0.3s;
+	color:var(--c1);
+}
+.sEIn:focus{
+	border:1px solid#666;
+}
+#sE2{
+	margin-bottom:10px;
+}
+#serialEntery button{
+	float:right;
+	height:30px;
+	width:45px;
+	margin-top:5px;
+	border-radius:5px;
+	border:none;
+	outline:none;
+	font-family:quicksand;
+	font-size:15px;
+	font-weight:600;
+	transition:0.3s;
+	color:#0c3;
+	background:transparent;
+}
+#serialEntery button:active{
+	background:var(--noteback);	
 }
 @media only screen and (max-width:1000px){
 	#notesblock{
