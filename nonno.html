@@ -348,6 +348,33 @@ document.onkeydown = (e) => {
 		</script>
 	</div>
 	
+	<div id="note-editor">
+		<script>		
+			function openNote(name){
+				if(sessionStorage.getItem("favfilt") === "on"){
+					arrangeStar();
+				}
+				else{}
+				document.getElementById("srch-ic").innerHTML = "search";
+				all("none", "");
+				document.getElementById("note-editor").style.display = "block";
+				document.getElementById("edit-title-in").value = name;
+			}
+			function clEdit(){
+				document.getElementById("navbar").style.display = "block";
+				document.getElementById("rht-src-ic").style.display = "block";
+				document.getElementById("bt-bot-rt-1").style.display = "block";
+				document.getElementById("bt-bot-rt-2").style.display = "block";
+				document.getElementById("bt-bot-rt-3").style.display = "block";
+				document.getElementById("notebcont").style.display = "block";
+				document.getElementById("note-editor").style.display = "none";
+			}
+		</script>
+		<div id="edit-nav">
+			<button id="editback-bt" onclick="clEdit()"><i class="material-symbols-outlined">arrow_back_ios_new</i></button>
+			<input type="text" id="edit-title-in" placeholder="Title" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false">
+		</div>
+	</div>
 	
 </div>
 </body>
@@ -879,6 +906,65 @@ document.onkeydown = (e) => {
 }
 #serialEntery button:active{
 	background:var(--noteback);	
+}
+#note-editor{
+	display:none;
+	height:100%;
+	width:100%;	
+	background:var(--noteback);
+	font-family:quicksand;
+	color:var(--c1);
+	animation-name:fade-in;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+	animation-timming-count:linear;
+}
+@keyframes fade-in{
+	0%{opacity:0;}
+	100%{opacity:1;}
+}
+#edit-nav{
+	/*border:1px solid#f00;*/
+	height:40px;
+	width:100%;
+}
+#editback-bt{
+	position:fixed;
+	top:5px;
+	left:5px;
+	height:30px;
+	width:30px;
+	border-radius:50%;
+	outline:none;
+	border:none;
+	background:transparent;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	transition:0.3s;
+}
+#editback-bt i{
+	float:left;
+	font-size:16px;
+	line-height:22px;	
+	color:var(--c1);
+}
+#editback-bt:active{
+	background:var(--noteback);
+}
+#edit-title-in{
+	width:calc(100% - 145px);
+	height:30px;
+	position:fixed;
+	top:3px;
+	left:40px;
+	font-size:17px;
+	font-family:quicksand;
+	border:none;
+	outline:none;
+	color:var(--c1);
+	font-weight:bold;
+	background:transparent;
 }
 @media only screen and (max-width:1000px){
 	#notesblock{
