@@ -177,6 +177,14 @@ document.onkeydown = (e) => {
 		event.preventDefault();
 		document.getElementById("sEbt").click();		
 	}
+    if (e.ctrlKey && e.key == 's' && document.getElementById("note-editor").style.display === "block") {
+        e.preventDefault();
+		clEdit();
+    }
+    if (e.ctrlKey && e.key == 'n') {
+        e.preventDefault();
+		createNew();
+    }
 };
 </script>
 <div class="cont" id="cont" oncontextmenu="right()">
@@ -260,6 +268,7 @@ document.onkeydown = (e) => {
 					document.getElementById("bt-rt-ic2").style.fontVariationSettings = "'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24";
 					sessionStorage.setItem("favfilt", "on");
 				}
+				navigator.vibrate(200);
 			}
 			function opSett(){
 				if(sessionStorage.getItem("favfilt") === "on"){
@@ -288,7 +297,7 @@ document.onkeydown = (e) => {
 
 	<div onclick="opSett()" title="More Actions" class="bot-rt-bt" id="bt-bot-rt-1"><i id="bt-rt-ic1" class="material-symbols-outlined">menu</i></div>
 	<div onclick="arrangeStar()" title="Starred" class="bot-rt-bt" id="bt-bot-rt-2"><i id="bt-rt-ic2" class="material-symbols-outlined">star</i></div>
-	<div title="Create New Note" class="bot-rt-bt" id="bt-bot-rt-3"><i id="bt-rt-ic3" class="material-symbols-outlined">add</i></div>
+	<div onclick="createNew()" title="Create New Note" class="bot-rt-bt" id="bt-bot-rt-3"><i id="bt-rt-ic3" class="material-symbols-outlined">add</i></div>
 	
 	
 	<!--<div id="notesblock" onclick="opennote('')">
@@ -382,6 +391,10 @@ document.onkeydown = (e) => {
 					}
 					else{
 						localStorage.setItem("onno" + document.getElementById("edit-title-in").value, cont2);
+						var kh = localStorage.getItem("onnokeyhis2");
+						var newkh = kh.replace(new RegExp(sessionStorage.getItem("initialTitl"), "g"), document.getElementById("edit-title-in").value);
+						localStorage.setItem("onnokeyhis2", newkh);
+						localStorage.setItem("onnokeyhis1", newkh);
 						localStorage.removeItem("onno" + sessionStorage.getItem("initialTitl"));
 					}
 				}
@@ -395,6 +408,28 @@ document.onkeydown = (e) => {
 				document.getElementById("notebcont").style.display = "block";
 				document.getElementById("note-editor").style.display = "none";
 				splitKN();
+			}
+			function createNew(){
+				if(confirm("Create new Note?") === true){
+					var d = new Date();				
+					var t = d.getDate().toString();
+					var y = (d.getMonth()+1).toString();
+					var x = d.getFullYear().toString();
+					var m = d.getMinutes().toString();
+					var h = d.getHours().toString();
+					var s = d.getSeconds().toString();
+					
+					var name = "new_" + x + ("0" + y).substr(-2) + ("0" + t).substr(-2) + ("0" + h).substr(-2) + ("0" + m).substr(-2) + ("0" + s).substr(-2);
+					var date = ("0" + t).substr(-2) + "." + ("0" + y).substr(-2) + "." + ("0" + x).substr(-4);
+					
+					var allks = localStorage.getItem("onnokeyhis2") + " " + name + ",";
+					localStorage.setItem("onnokeyhis2", allks);
+					localStorage.setItem("onnokeyhis1", allks);
+					localStorage.setItem("onno" + name, "#date#" + date);
+					alert("New Note named " + name + " created!");
+					splitKN();
+				}
+				else{}
 			}
 		</script>
 		<script>
@@ -435,6 +470,7 @@ document.onkeydown = (e) => {
 	--noteback:rgba(255,255,255,.4);
 	--noteback2:rgba(255,255,255,.4);
 	--ntaft:#666;
+	--date:#333;
 }
 .dark{
 	--navback:rgba(0,0,0,.7);
@@ -446,6 +482,7 @@ document.onkeydown = (e) => {
 	--noteback:rgba(0,0,0,.7);
 	--noteback2:rgba(0,0,0,.5);
 	--ntaft:#666;
+	--date:#999;
 }
 *::selection{
 	color:#fff;
@@ -715,7 +752,7 @@ document.onkeydown = (e) => {
 	width:65px;
 	height:50px;
 	float:right;
-	color:#666;
+	color:var(--date);
 	font-size:12px;
 	font-weight:530;
 	line-height:50px;
