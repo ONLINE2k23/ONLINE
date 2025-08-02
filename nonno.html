@@ -3,6 +3,7 @@
 <head>
 <title>ONLINE Notes Beta</title>
 <link rel="icon" href="https://ONLINE2k23.github.io/ONLINE/onno2.png">
+<link rel="stylesheet" href="nonnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -17,6 +18,7 @@
 <body onload="main()">
 <script>
 function main() {
+	sessionStorage.clear();
 	themeload();
 	askSerialId();
 	//document.getElementById("keyhista").innerHTML = localStorage.getItem("onnokeyhis2");
@@ -47,7 +49,7 @@ function askSerialId(){
 		document.getElementById("serialEntery").style.display = "block";
 		document.getElementById("sE1").focus();
 		all("none", "");
-  localStorage.setItem("onnokeyhis2","");
+		localStorage.setItem("onnokeyhis2","");
 	}
 }
 function splitKN(){
@@ -375,6 +377,9 @@ document.onkeydown = (e) => {
 				sessionStorage.setItem("initialVal",localStorage.getItem("onno" + name).split("#date#")[0]);
 				sessionStorage.setItem("initialTitl", name);
 				document.getElementById("change-ind").style.background = "transparent";
+				sessionStorage.setItem("unRe", " ");
+				sessionStorage.setItem("secinititl", name);
+				checkunre();
 			}
 			function clEdit(){				
 				if(document.getElementById("change-ind").style.background === "rgb(255, 17, 17)" && confirm("Save Changes?") === true){
@@ -454,8 +459,70 @@ document.onkeydown = (e) => {
 			<button id="editback-bt" onclick="clEdit()"><i class="material-symbols-outlined">arrow_back_ios_new</i></button>
 			<input type="text" id="edit-title-in" placeholder="Title" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false" onkeyup="checkForChange()">
 			<div id="change-ind"></div>
+			<button id="edit-note-menubt" title="Menu" onclick="openEditMenu()"><i class="material-symbols-outlined">more_vert</i></button>
 		</div>
 		<textarea id="editor-main" placeholder="Write Here!" onkeyup="checkForChange()"></textarea>
+		
+		<div id="toolbar">
+			<button id="tobt1" class="tobt" onclick="saveNote()" title="Save"><i class="material-symbols-outlined">Save</i></button>
+			<button id="tobt2" class="tobt" onclick="setStar()" title="Add to Satrred"><i id="editor-star" class="material-symbols-outlined">star</i></button>
+			<button id="tobt3" class="tobt" onclick="undoRedo()" title="Undo"><i id="undoredoi" class="material-symbols-outlined">undo</i></button>
+			<button id="tobt4" class="tobt" onclick="clearEdit()" title="Clear"><i class="material-symbols-outlined">clear</i></button>
+			<button id="tobt5" class="tobt" onclick="delNote()" title="Delete this Note"><i class="material-symbols-outlined">delete</i></button>
+			
+			<script>
+				function clearEdit(){
+					document.getElementById("editor-main").value = "";
+					checkForChange();
+				}
+				function undoRedo(){
+					if(sessionStorage.getItem("unRe") === "undo"){
+						if(document.getElementById("edit-title-in").value !== sessionStorage.getItem("secinititll") && document.getElementById("editor-main").value !== sessionStorage.getItem("secinival")){
+							document.getElementById("editor-main").value = sessionStorage.getItem("initialVal");
+							document.getElementById("edit-title-in").value = sessionStorage.getItem("secinititll");
+						}
+						else if(document.getElementById("editor-main").value !== sessionStorage.getItem("secinival")){
+							document.getElementById("editor-main").value = sessionStorage.getItem("secinival");
+						}
+						else if(document.getElementById("edit-title-in").value !== sessionStorage.getItem("secinititll")){
+							document.getElementById("edit-title-in").value = sessionStorage.getItem("secinititl");
+						}
+						else{}
+					}
+					else{
+						if(document.getElementById("editor-main").value !== sessionStorage.getItem("initialVal") && document.getElementById("edit-title-in").value !== sessionStorage.getItem("initialTitl")){
+							sessionStorage.setItem("secinival", document.getElementById("editor-main").value);
+							document.getElementById("editor-main").value = sessionStorage.getItem("initialVal");
+							sessionStorage.setItem("secinititl", document.getElementById("edit-title-in").value);
+							document.getElementById("edit-title-in").value = sessionStorage.getItem("initialTitl");
+						}
+						else if(document.getElementById("editor-main").value !== sessionStorage.getItem("initialVal")){
+							sessionStorage.setItem("secinival", document.getElementById("editor-main").value);
+							document.getElementById("editor-main").value = sessionStorage.getItem("initialVal");
+						}
+						else if(document.getElementById("edit-title-in").value !== sessionStorage.getItem("initialTitl")){
+							sessionStorage.setItem("secinititl", document.getElementById("edit-title-in").value);
+							document.getElementById("edit-title-in").value = sessionStorage.getItem("initialTitl");
+						}
+						else{}
+					}
+					checkunre();
+					checkForChange();
+				}
+				function checkunre(){
+					if(document.getElementById("editor-main").value !== sessionStorage.getItem("initialVal") && document.getElementById("edit-title-in").value !== sessionStorage.getItem("initialTitl")){				
+						sessionStorage.setItem("unRe", "redo");
+						document.getElementById("tobt3").title = "Undo";
+						document.getElementById("undoredoi").innerHTML = "undo";
+					}
+					else{
+						sessionStorage.setItem("unRe", "undo");
+						document.getElementById("tobt3").title = "Redo";
+						document.getElementById("undoredoi").innerHTML = "redo";
+					}
+				}
+			</script>
+		</div>
 	</div>
 	
 </div>
@@ -1046,7 +1113,7 @@ document.onkeydown = (e) => {
 	background:var(--noteback);
 }
 #edit-title-in{
-	width:calc(100% - 155px);
+	width:calc(100% - 125px);
 	height:30px;
 	position:fixed;
 	top:8px;
@@ -1061,7 +1128,7 @@ document.onkeydown = (e) => {
 }
 #change-ind{
 	position:fixed;
-	right:85px;
+	right:50px;
 	top:20px;
 	height:10px;
 	width:10px;
@@ -1073,7 +1140,7 @@ document.onkeydown = (e) => {
 	top:50px;
 	left:0px;
 	width:calc(100% - 4px);
-	height:calc(100% - 100px);
+	height:calc(100% - 105px);
 	overflow:hidden;
 	overflow-y:auto;
 	outline:none;
@@ -1085,6 +1152,60 @@ document.onkeydown = (e) => {
 	font-size:16px;
 	line-height:20px;
 	color:var(--c1);
+}
+#edit-note-menubt{
+	position:fixed;
+	top:5px;
+	right:5px;
+	height:40px;
+	width:40px;
+	border-radius:50%;
+	outline:none;
+	border:none;
+	background:transparent;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	transition:0.3s;
+}
+#edit-note-menubt i{
+	width:25px;
+	float:left;
+	font-size:22px;
+	line-height:22px;
+	font-variation-settings:'FILL' 0, 'wght' 320, 'GRAD' 0, 'opsz' 24;
+	color:var(--c1);
+}
+#edit-note-menubt:active{
+	background:var(--noteback);
+}
+#toolbar{
+	width:225px;
+	height:40px;
+	position:fixed;
+	left:50%;
+	bottom:0px;
+	transform:translate(-50%, 0);
+	padding:5px 5px 5px 0;
+}
+#toolbar .tobt{
+	height:40px;
+	width:40px;
+	float:left;
+	margin:0 0 0 5px;
+	border:none;
+	outline:none;
+	border-radius:50%;
+	background:transparent;
+	color:var(--c1);
+	transition:0.3s;
+}
+#toolbar .tobt i{
+	font-variation-settings:'FILL' 0, 'wght' 250, 'GRAD' 0, 'opsz' 24;
+	color:var(--c1);
+}
+#toolbar .tobt:active{
+	background:var(--noteback);
 }
 @media only screen and (max-width:1000px){
 	#notesblock{
