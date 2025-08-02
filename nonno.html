@@ -3,7 +3,6 @@
 <head>
 <title>ONLINE Notes Beta</title>
 <link rel="icon" href="https://ONLINE2k23.github.io/ONLINE/onno2.png">
-<link rel="stylesheet" href="nonnocss.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -370,6 +369,7 @@ document.onkeydown = (e) => {
 				else{}
 				document.getElementById("srch-ic").innerHTML = "search";
 				all("none", "");
+				document.getElementById("botbanner").style.display = "none";
 				document.getElementById("note-editor").style.display = "block";
 				document.getElementById("edit-title-in").value = name;
 				document.getElementById("editor-main").value = localStorage.getItem("onno" + name).split("#date#")[0];
@@ -414,6 +414,8 @@ document.onkeydown = (e) => {
 				document.getElementById("notebcont").style.display = "block";
 				document.getElementById("note-editor").style.display = "none";
 				splitKN();
+				
+				document.getElementById("botbanner").style.display = "block";
 			}
 			function createNew(){
 				if(confirm("Create new Note?") === true){
